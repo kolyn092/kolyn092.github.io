@@ -24,3 +24,17 @@
 1. **브라우저 캐시 지우기**: Ctrl+F5 또는 하드 새로고침
 2. **배포 시간 대기**: GitHub Pages는 배포 후 1-2분 소요
 3. **빈 커밋 푸시**: `git commit --allow-empty -m "Trigger rebuild" && git push`
+
+### 추가 해결 방법
+
+1. **시크릿 모드에서 접근**: 브라우저 캐시 문제 해결
+2. **다른 브라우저로 테스트**: Chrome, Firefox, Edge 등
+3. **GitHub Pages 상태 확인**: https://www.githubstatus.com/
+4. **Actions 탭 확인**: GitHub 저장소 → Actions에서 배포 상태 확인
+
+### 최종 확인사항
+
+- ✅ GitHub 저장소 → Settings → Pages → Source: "Deploy from a branch"
+- ✅ Branch: "gh-pages" 선택
+- ✅ Folder: "/ (root)" 선택
+- ✅ .nojekyll 파일 포함됨
