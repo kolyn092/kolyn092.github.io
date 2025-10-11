@@ -184,7 +184,7 @@ export function AppProvider({ children }) {
         payload: { cores, gems, nextGemId }
       });
     }
-  }, [state.currentPage]);
+  }, [state.currentPage, state.cores, state.gems, dispatch]);
 
   // Save data to localStorage when state changes
   useEffect(() => {
