@@ -1,7 +1,7 @@
 # 로스트아크 아크그리드 최적화 시뮬레이터
 
 ## 🚀 배포 URL
-**https://kolyn092.github.io**
+**https://kolyn092.github.io/ark-grid-optimizer**
 
 ## 🔧 GitHub Pages 설정
 
