@@ -1,7 +1,7 @@
 import React from 'react';
 import { useApp, CORE_TYPES, CORE_LIMITS } from '../context/AppContext';
 
-function CoreCard({ core }) {
+const CoreCard = React.memo(function CoreCard({ core }) {
   const { dispatch, ActionTypes } = useApp();
 
   const handleTypeChange = (type) => {
@@ -62,6 +62,6 @@ function CoreCard({ core }) {
       </div>
     </div>
   );
-}
+});
 
 export default CoreCard;

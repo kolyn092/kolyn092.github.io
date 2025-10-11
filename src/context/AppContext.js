@@ -170,6 +170,7 @@ export function AppProvider({ children }) {
   const [state, dispatch] = useReducer(appReducer, initialState);
 
   // Load data from localStorage on mount
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const savedCores = localStorage.getItem(`arkGrid${state.currentPage}Cores`);
     const savedGems = localStorage.getItem(`arkGrid${state.currentPage}Gems`);
@@ -184,7 +185,7 @@ export function AppProvider({ children }) {
         payload: { cores, gems, nextGemId }
       });
     }
-  }, [state.currentPage, state.cores, state.gems, dispatch]);
+  }, [state.currentPage]);
 
   // Save data to localStorage when state changes
   useEffect(() => {

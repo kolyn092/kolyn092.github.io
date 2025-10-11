@@ -2,7 +2,7 @@ import React from 'react';
 import { useApp } from '../context/AppContext';
 import { calculateGemPower } from '../utils/gemCalculations';
 
-function GemCard({ gem }) {
+const GemCard = React.memo(function GemCard({ gem }) {
   const { dispatch, ActionTypes } = useApp();
 
   const handleEdit = (e) => {
@@ -72,6 +72,6 @@ function GemCard({ gem }) {
       </div>
     </div>
   );
-}
+});
 
 export default GemCard;
