@@ -1,0 +1,35 @@
+import { OPTION_LEVEL_VALUES } from '../context/AppContext';
+
+export function calculateGemPower(gem) {
+  let power = 0;
+  
+  if (gem.option1Level > 0 && gem.option1Level <= 5 && 
+      !['공격력', '보스피해', '추가피해'].includes(gem.option1)) {
+    power += OPTION_LEVEL_VALUES[gem.option1][gem.option1Level] || 0;
+  }
+  
+  if (gem.option2Level > 0 && gem.option2Level <= 5 && 
+      !['공격력', '보스피해', '추가피해'].includes(gem.option2)) {
+    power += OPTION_LEVEL_VALUES[gem.option2][gem.option2Level] || 0;
+  }
+  
+  return power;
+}
+
+export function calculateCorePoints(gems) {
+  return gems.reduce((total, gem) => total + gem.points, 0);
+}
+
+export function isCoreEffectActive(points) {
+  return [10, 14, 17, 18, 19, 20].includes(points);
+}
+
+export function getPointPriority(points) {
+  if (points >= 20) return 6;
+  if (points >= 19) return 5;
+  if (points >= 18) return 4;
+  if (points >= 17) return 3;
+  if (points >= 14) return 2;
+  if (points >= 10) return 1;
+  return 0;
+}
