@@ -1,7 +1,7 @@
 # 로스트아크 아크그리드 최적화 시뮬레이터
 
 ## 🚀 배포 URL
-**https://kolyn092.github.io/ark-grid-optimizer**
+**https://kolyn092.github.io**
 
 ## 🔧 GitHub Pages 설정
 
@@ -9,7 +9,7 @@
 
 1. **GitHub 저장소 → Settings → Pages**
 2. **Source**: "Deploy from a branch" 선택
-3. **Branch**: "gh-pages" 선택  
+3. **Branch**: "main" 선택  
 4. **Folder**: "/ (root)" 선택
 5. **Save** 클릭
 
@@ -35,6 +35,6 @@
 ### 최종 확인사항
 
 - ✅ GitHub 저장소 → Settings → Pages → Source: "Deploy from a branch"
-- ✅ Branch: "gh-pages" 선택
+- ✅ Branch: "main" 선택
 - ✅ Folder: "/ (root)" 선택
 - ✅ .nojekyll 파일 포함됨
