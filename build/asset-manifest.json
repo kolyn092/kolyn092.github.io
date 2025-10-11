@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/ark-grid-optimizer/static/css/main.c5a4dfaa.css",
-    "main.js": "/ark-grid-optimizer/static/js/main.144d9b6f.js",
+    "main.js": "/ark-grid-optimizer/static/js/main.7801eff7.js",
     "index.html": "/ark-grid-optimizer/index.html",
     "main.c5a4dfaa.css.map": "/ark-grid-optimizer/static/css/main.c5a4dfaa.css.map",
-    "main.144d9b6f.js.map": "/ark-grid-optimizer/static/js/main.144d9b6f.js.map"
+    "main.7801eff7.js.map": "/ark-grid-optimizer/static/js/main.7801eff7.js.map"
   },
   "entrypoints": [
     "static/css/main.c5a4dfaa.css",
-    "static/js/main.144d9b6f.js"
+    "static/js/main.7801eff7.js"
   ]
 }
