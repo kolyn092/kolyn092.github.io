@@ -64,6 +64,7 @@ export function optimize(cores, gems) {
     for (let gemCount = 1; gemCount <= 4; gemCount++) {
       const allCombos = getCombinations(availableGems, gemCount);
       
+      // eslint-disable-next-line no-loop-func
       allCombos.forEach(combo => {
         const totalCost = combo.reduce((s, g) => s + g.cost, 0);
         if (totalCost <= core.limit) {

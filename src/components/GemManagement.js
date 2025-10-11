@@ -5,7 +5,7 @@ import GemForm from './GemForm';
 
 function GemManagement() {
   const { state, dispatch, ActionTypes } = useApp();
-  const { gems, currentPage, showAddForm } = state;
+  const { gems, currentPage } = state;
 
   const handleToggleAddForm = () => {
     dispatch({
