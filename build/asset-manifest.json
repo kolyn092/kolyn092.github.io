@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/kolyn092.github.io/static/css/main.c5a4dfaa.css",
+    "main.js": "/kolyn092.github.io/static/js/main.a914d24c.js",
+    "index.html": "/kolyn092.github.io/index.html",
+    "main.c5a4dfaa.css.map": "/kolyn092.github.io/static/css/main.c5a4dfaa.css.map",
+    "main.a914d24c.js.map": "/kolyn092.github.io/static/js/main.a914d24c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c5a4dfaa.css",
+    "static/js/main.a914d24c.js"
+  ]
+}
