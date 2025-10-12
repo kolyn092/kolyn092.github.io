@@ -2,7 +2,7 @@ import React from 'react';
 import CoreCard from './CoreCard';
 import { useApp } from '../context/AppContext';
 
-function CoreSettings() {
+const CoreSettings = React.memo(function CoreSettings() {
   const { state } = useApp();
   const { cores, currentPage } = state;
 
@@ -18,6 +18,6 @@ function CoreSettings() {
       </div>
     </div>
   );
-}
+});
 
 export default CoreSettings;

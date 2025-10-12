@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, useEffect, useCallback } from 'react';
+import React, { createContext, useContext, useReducer, useEffect } from 'react';
 
 // Constants
 export const CORE_LIMITS = {
@@ -170,7 +170,8 @@ export function AppProvider({ children }) {
   const [state, dispatch] = useReducer(appReducer, initialState);
 
   // Load data from localStorage on mount
-  const loadData = useCallback(() => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
     const savedCores = localStorage.getItem(`arkGrid${state.currentPage}Cores`);
     const savedGems = localStorage.getItem(`arkGrid${state.currentPage}Gems`);
     
@@ -184,13 +185,11 @@ export function AppProvider({ children }) {
         payload: { cores, gems, nextGemId }
       });
     }
-  }, [state.currentPage, state.cores, state.gems, dispatch]);
-
-  useEffect(() => {
-    loadData();
-  }, [loadData]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.currentPage]);
 
   // Save data to localStorage when state changes
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     localStorage.setItem(`arkGrid${state.currentPage}Cores`, JSON.stringify(state.cores));
     localStorage.setItem(`arkGrid${state.currentPage}Gems`, JSON.stringify(state.gems));

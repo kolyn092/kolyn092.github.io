@@ -3,7 +3,7 @@ import { useApp } from '../context/AppContext';
 import GemCard from './GemCard';
 import GemForm from './GemForm';
 
-function GemManagement() {
+const GemManagement = React.memo(function GemManagement() {
   const { state, dispatch, ActionTypes } = useApp();
   const { gems, currentPage } = state;
 
@@ -33,6 +33,6 @@ function GemManagement() {
       </div>
     </div>
   );
-}
+});
 
 export default GemManagement;

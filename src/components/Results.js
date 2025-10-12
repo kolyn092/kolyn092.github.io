@@ -2,7 +2,7 @@ import React from 'react';
 import { useApp } from '../context/AppContext';
 import ResultCard from './ResultCard';
 
-function Results() {
+const Results = React.memo(function Results() {
   const { state } = useApp();
   const { results, currentPage } = state;
 
@@ -22,6 +22,6 @@ function Results() {
       </div>
     </div>
   );
-}
+});
 
 export default Results;

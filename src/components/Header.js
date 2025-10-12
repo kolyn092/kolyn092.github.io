@@ -2,7 +2,7 @@ import React from 'react';
 import { useApp } from '../context/AppContext';
 import DataControls from './DataControls';
 
-function Header() {
+const Header = React.memo(function Header() {
   const { state, dispatch, ActionTypes } = useApp();
   const { currentPage } = state;
 
@@ -36,6 +36,6 @@ function Header() {
       <DataControls />
     </div>
   );
-}
+});
 
 export default Header;
