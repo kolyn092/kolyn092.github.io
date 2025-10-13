@@ -5,7 +5,7 @@ import DataTable from '../components/forms/DataTable';
 
 // 사용자 관리 페이지 예시
 const UserManagement = React.memo(function UserManagement() {
-  const { loading, error, data, get, post, put, delete: del } = useHttp();
+  const { loading, error, get, post, put, delete: del } = useHttp();
   const [users, setUsers] = useState([]);
   const [editingUser, setEditingUser] = useState(null);
 
@@ -75,6 +75,7 @@ const UserManagement = React.memo(function UserManagement() {
   // 컴포넌트 마운트 시 사용자 목록 조회
   useEffect(() => {
     fetchUsers();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // 폼 필드 정의

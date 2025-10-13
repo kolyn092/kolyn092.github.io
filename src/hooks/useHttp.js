@@ -139,7 +139,7 @@ export function useFormData(initialData = {}) {
     }));
   }, []);
 
-  const setErrors = useCallback((newErrors) => {
+  const setAllErrors = useCallback((newErrors) => {
     setErrors(newErrors);
   }, []);
 
@@ -176,7 +176,7 @@ export function useFormData(initialData = {}) {
     updateField,
     updateFields,
     setFieldError,
-    setErrors,
+    setErrors: setAllErrors,
     reset,
     validate,
   };

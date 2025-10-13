@@ -4,7 +4,7 @@ import HttpForm from '../components/forms/HttpForm';
 
 // API 테스트 페이지
 const ApiTest = React.memo(function ApiTest() {
-  const { loading, error, data, get, post, put, delete: del } = useHttp();
+  const { loading, error, get, post, put, delete: del } = useHttp();
   const [response, setResponse] = useState(null);
   const [requestType, setRequestType] = useState('GET');
   const [endpoint, setEndpoint] = useState('/api/test');

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHttp, useFormData } from '../../hooks/useHttp';
 import FormField from './FormField';
 
@@ -14,7 +14,7 @@ const HttpForm = React.memo(function HttpForm({
   children,
 }) {
   const { formData, errors, updateField, reset: resetForm, validate } = useFormData();
-  const { loading, error: httpError, post, reset: resetHttp } = useHttp();
+  const { loading, error: httpError, reset: resetHttp } = useHttp();
 
   const handleFieldChange = (field) => (e) => {
     const value = e.target.value;
