@@ -35,7 +35,7 @@ const MainHeader = React.memo(function MainHeader() {
                 to="/ark-grid-optimizer" 
                 className={`nav-link ${isActive('/ark-grid-optimizer') ? 'active' : ''}`}
               >
-                ⚔️ 아크그리드 최적화 시뮬레이터
+                ⚔️ 
               </Link>
             </li>
             <li className="nav-item">
@@ -43,7 +43,7 @@ const MainHeader = React.memo(function MainHeader() {
                 to="/user-management" 
                 className={`nav-link ${isActive('/user-management') ? 'active' : ''}`}
               >
-                👥 사용자 관리
+                👥 
               </Link>
             </li>
             <li className="nav-item">
@@ -51,7 +51,7 @@ const MainHeader = React.memo(function MainHeader() {
                 to="/api-test" 
                 className={`nav-link ${isActive('/api-test') ? 'active' : ''}`}
               >
-                🔧 API 테스트
+                🔧 
               </Link>
             </li>
           </ul>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useApp, OPTION_TYPES } from '../context/AppContext';
+import { useApp, OPTION_TYPES } from '../../context/AppContext';
 
 function GemForm() {
   const { state, dispatch, ActionTypes } = useApp();
