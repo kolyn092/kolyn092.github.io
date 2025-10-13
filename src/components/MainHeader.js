@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useTheme } from '../context/ThemeContext';
 
 const MainHeader = React.memo(function MainHeader() {
   const location = useLocation();
+  const { isDarkMode, toggleTheme } = useTheme();
 
   const isActive = (path) => {
     return location.pathname === path || location.hash === `#${path}`;
@@ -56,8 +58,12 @@ const MainHeader = React.memo(function MainHeader() {
         </nav>
         
         <div className="header-actions">
-          <button className="theme-toggle" title="테마 변경">
-            🌙
+          <button 
+            className="theme-toggle" 
+            onClick={toggleTheme}
+            title={isDarkMode ? "라이트 모드로 변경" : "다크 모드로 변경"}
+          >
+            {isDarkMode ? '☀️' : '🌙'}
           </button>
         </div>
       </div>

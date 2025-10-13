@@ -1,6 +1,7 @@
 import React from 'react';
 import { Routes, Route, HashRouter } from 'react-router-dom';
 import { AppProvider } from './context/AppContext';
+import { ThemeProvider } from './context/ThemeContext';
 import MainHeader from './components/MainHeader';
 import NewHomePage from './components/NewHomePage';
 import Header from './components/Header';
@@ -29,15 +30,17 @@ function ArkGridOptimizer() {
 
 function App() {
   return (
-    <HashRouter>
-      <MainHeader />
-      <Routes>
-        <Route path="/" element={<NewHomePage />} />
-        <Route path="/ark-grid-optimizer" element={<ArkGridOptimizer />} />
-        <Route path="/user-management" element={<UserManagement />} />
-        <Route path="/api-test" element={<ApiTest />} />
-      </Routes>
-    </HashRouter>
+    <ThemeProvider>
+      <HashRouter>
+        <MainHeader />
+        <Routes>
+          <Route path="/" element={<NewHomePage />} />
+          <Route path="/ark-grid-optimizer" element={<ArkGridOptimizer />} />
+          <Route path="/user-management" element={<UserManagement />} />
+          <Route path="/api-test" element={<ApiTest />} />
+        </Routes>
+      </HashRouter>
+    </ThemeProvider>
   );
 }
 
