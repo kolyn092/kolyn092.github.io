@@ -1,6 +1,6 @@
 import React from 'react';
-import { useApp } from '../context/AppContext';
-import { optimize } from '../utils/optimization';
+import { useApp } from '../../context/AppContext';
+import { optimize } from '../../utils/optimization';
 
 function OptimizationButton() {
   const { state, dispatch, ActionTypes } = useApp();

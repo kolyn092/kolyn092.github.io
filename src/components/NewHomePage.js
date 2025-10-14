@@ -85,20 +85,6 @@ const NewHomePage = React.memo(function NewHomePage() {
       {/* 푸터 */}
       <footer className="main-footer">
         <div className="footer-container">
-          <div className="footer-content">
-            <div className="footer-section">
-              <h3>프로젝트</h3>
-              <p>다양한 웹 애플리케이션과 도구들을 통해 더 나은 개발 경험을 제공합니다.</p>
-            </div>
-            <div className="footer-section">
-              <h3>기술 스택</h3>
-              <p>React, Node.js, JavaScript, HTML5, CSS3</p>
-            </div>
-            <div className="footer-section">
-              <h3>연락처</h3>
-              <p>GitHub: kolyn092</p>
-            </div>
-          </div>
           <div className="footer-bottom">
             <p>&copy; 2024 Kolyn092. All rights reserved.</p>
           </div>
