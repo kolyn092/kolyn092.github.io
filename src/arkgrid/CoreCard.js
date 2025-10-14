@@ -4,6 +4,16 @@ import { useApp, CORE_TYPES, CORE_LIMITS } from '../context/AppContext';
 const CoreCard = React.memo(function CoreCard({ core }) {
   const { dispatch, ActionTypes } = useApp();
 
+  const getGradeClass = (grade) => {
+    const gradeMap = {
+      '영웅': 'hero',
+      '전설': 'legend', 
+      '유물': 'relic',
+      '고대': 'ancient'
+    };
+    return gradeMap[grade] || 'hero';
+  };
+
   const handleTypeChange = (type) => {
     dispatch({
       type: ActionTypes.UPDATE_CORE_TYPE,
@@ -25,7 +35,7 @@ const CoreCard = React.memo(function CoreCard({ core }) {
   };
 
   return (
-    <div className="core-card">
+    <div className={`core-card grade-${getGradeClass(core.grade)}`}>
       <div className="core-header">
         <div className={`core-icon ${getIconClass(core.type)}`}></div>
         <h3 className="core-title">{core.name}</h3>
@@ -53,6 +63,8 @@ const CoreCard = React.memo(function CoreCard({ core }) {
             <option key={grade} value={grade}>{grade}</option>
           ))}
         </select>
+        <div style={{ marginTop: '8px', fontSize: '0.875rem', fontWeight: '600', color: 'var(--text-secondary)' }}>
+        </div>
       </div>
       <div className="core-limit">
         <span className="core-limit-label">의지력 한도</span>

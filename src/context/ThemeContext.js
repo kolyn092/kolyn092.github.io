@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useEffect } from 'react';
 
 // 테마 컨텍스트 생성
 const ThemeContext = createContext();
@@ -12,34 +12,19 @@ export function useTheme() {
   return context;
 }
 
-// 테마 프로바이더
+// 테마 프로바이더 - 다크모드 고정
 export function ThemeProvider({ children }) {
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    // 로컬 스토리지에서 테마 설정 불러오기
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      return savedTheme === 'dark';
-    }
-    // 시스템 테마 설정 확인
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
-  });
+  // 다크모드 고정
+  const isDarkMode = true;
 
-  // 테마 토글 함수
-  const toggleTheme = () => {
-    setIsDarkMode(prev => !prev);
-  };
-
-  // 테마 변경 시 로컬 스토리지에 저장
+  // 다크모드 설정 적용
   useEffect(() => {
-    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-    
-    // HTML 요소에 테마 클래스 추가/제거
-    document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
-  }, [isDarkMode]);
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }, []);
 
   const value = {
     isDarkMode,
-    toggleTheme,
+    toggleTheme: () => {}, // 빈 함수로 유지 (호환성)
   };
 
   return (

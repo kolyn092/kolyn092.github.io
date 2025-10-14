@@ -2,7 +2,7 @@ import React from 'react';
 import { useApp } from '../context/AppContext';
 import ArkGridResultCard from './ArkGridResultCard';
 
-const Results = React.memo(function Results() {
+const ArkGridResults = React.memo(function Results() {
   const { state } = useApp();
   const { results, currentPage } = state;
 
@@ -24,4 +24,4 @@ const Results = React.memo(function Results() {
   );
 });
 
-export default Results;
+export default ArkGridResults;
