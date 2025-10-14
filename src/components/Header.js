@@ -1,6 +1,6 @@
 import React from 'react';
 import { useApp } from '../context/AppContext';
-import DataControls from './DataControls';
+import DataControls from './arkgrid/DataControls';
 
 const Header = React.memo(function Header() {
   const { state, dispatch, ActionTypes } = useApp();

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useApp } from '../context/AppContext';
-import ResultCard from './ResultCard';
+import ResultCard from './arkgrid/ResultCard';
 
 const Results = React.memo(function Results() {
   const { state } = useApp();
