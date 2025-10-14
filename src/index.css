@@ -1,20 +1,24 @@
 /* 다크모드 변수 */
 :root {
   --bg-primary: #f8fafc;
-  --bg-secondary: #ffffff;
-  --text-primary: #2d3748;
+  --bg-secondary: #f1f5f9;
+  --text-primary: #000000;
   --text-secondary: #4a5568;
   --border-color: #e2e8f0;
   --shadow: rgba(0,0,0,0.05);
+  --card-bg: white;
+  --card-border: #e2e8f0;
 }
 
 [data-theme="dark"] {
   --bg-primary: #1a1a1a;
   --bg-secondary: #2d2d2d;
-  --text-primary: #ecf0f1;
-  --text-secondary: #bdc3c7;
-  --border-color: #4a5568;
+  --text-primary: white;
+  --text-secondary: rgb(255, 0, 0);
+  --border-color: #a8a8a8;
   --shadow: rgba(0,0,0,0.3);
+  --card-bg: #464646;
+  --card-border: #a8a8a8;
 }
 
 * {
@@ -42,7 +46,7 @@ body {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   padding: 24px;
-  border-radius: 12px;
+  border-radius: 0 0 12px 12px;
   margin-bottom: 20px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.1);
   text-align: center;
@@ -52,12 +56,14 @@ body {
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 8px;
+  color: var(--text-primary);
 }
 
 .header p {
   font-size: 1.1rem;
   opacity: 0.9;
   margin-bottom: 16px;
+  color: var(--text-secondary);
 }
 
 .page-switcher {
@@ -135,10 +141,11 @@ body {
 }
 
 .core-card {
-  border: 2px solid #e2e8f0;
+  border: 2px solid var(--card-border);
   border-radius: 12px;
   padding: 20px;
-  background-color: #fafafa;
+  background-color: var(--card-bg);
+  color: var(--text-primary);
   transition: all 0.2s ease;
 }
 
@@ -162,7 +169,7 @@ body {
 .core-title {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #2d3748;
+  color: var(--text-primary);
 }
 
 .form-group {
@@ -173,7 +180,7 @@ body {
   display: block;
   font-size: 0.875rem;
   font-weight: 500;
-  color: #4a5568;
+  color: var(--text-secondary);
   margin-bottom: 8px;
 }
 
@@ -181,9 +188,10 @@ body {
   width: 100%;
   padding: 12px;
   border-radius: 8px;
-  border: 2px solid #e2e8f0;
+  border: 2px solid var(--border-color);
   font-size: 1rem;
-  background-color: white;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
   cursor: pointer;
   outline: none;
   transition: border-color 0.2s ease;
@@ -198,9 +206,21 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 12px;
-  background-color: white;
+  background-color: var(--bg-secondary);
   border-radius: 8px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.core-limit-label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.core-limit-value {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
 }
 
 .gem-grid {
@@ -211,18 +231,19 @@ body {
 }
 
 .gem-card {
-  border: 2px solid #e2e8f0;
+  border: 2px solid var(--card-border);
   border-radius: 12px;
   padding: 20px;
-  background-color: white;
+  background-color: var(--card-bg);
+  color: var(--text-primary);
   position: relative;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 4px var(--shadow);
   cursor: pointer;
 }
 
 .gem-card.selected {
   border-color: #667eea;
-  background-color: #f0f4ff;
+  background-color: var(--bg-primary);
   box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
 }
 
@@ -263,15 +284,34 @@ body {
 
 .gem-option-label {
   font-size: 0.875rem;
-  color: #4a5568;
+  color: var(--text-secondary);
   font-weight: 500;
   min-width: 60px;
 }
 
 .gem-option-value {
   font-size: 0.875rem;
-  color: #2d3748;
+  color: var(--text-primary);
   font-weight: 600;
+}
+
+.gem-cost {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.gem-points {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.gem-list-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+  color: var(--text-secondary);
 }
 
 .gem-total {
@@ -280,9 +320,9 @@ body {
   align-items: center;
   margin-top: 8px;
   padding: 8px;
-  background-color: #f8fafc;
+  background-color: var(--bg-primary);
   border-radius: 6px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-color);
 }
 
 .gem-total-value {
@@ -339,7 +379,7 @@ body {
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 20px;
-  color: #2d3748;
+  color: var(--text-primary);
 }
 
 .form-row {
@@ -367,7 +407,7 @@ body {
 .form-field label {
   font-size: 0.75rem;
   font-weight: 500;
-  color: #4a5568;
+  color: var(--text-secondary);
   margin-bottom: 4px;
 }
 
@@ -381,7 +421,7 @@ body {
 }
 
 .form-field input:focus, .form-field select:focus {
-  border-color: #667eea;
+  border-color: #ea6666;
 }
 
 .form-buttons {
@@ -477,7 +517,7 @@ body {
 .result-title {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #2d3748;
+  color: var(--text-primary);
 }
 
 .result-stats {
@@ -485,10 +525,10 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 12px;
-  background-color: white;
+  background-color: var(--bg-secondary);
   border-radius: 8px;
   margin-bottom: 16px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-color);
 }
 
 .stat-group {
@@ -497,14 +537,14 @@ body {
 
 .stat-label {
   font-size: 0.875rem;
-  color: #6b7280;
+  color: var(--text-secondary);
   margin-bottom: 4px;
 }
 
 .stat-value {
   font-size: 1.125rem;
   font-weight: 600;
-  color: #2d3748;
+  color: var(--text-primary);
 }
 
 .stat-value.large {
@@ -524,7 +564,7 @@ body {
   border-radius: 6px;
   border: 1px solid #e2e8f0;
   font-size: 0.875rem;
-  color: #2d3748;
+  color: var(--text-primary);
 }
 
 .gem-item-header {
@@ -560,7 +600,7 @@ body {
 }
 
 .gem-item-option {
-  color: #4a5568;
+  color: var(--text-secondary);
 }
 
 .hidden {

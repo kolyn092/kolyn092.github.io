@@ -19,8 +19,8 @@ const CoreCard = React.memo(function CoreCard({ core }) {
   };
 
   const getIconClass = (type) => {
-    if (type === '해 코어') return 'sun';
-    if (type === '달 코어') return 'moon';
+    if (type.includes('해 코어')) return 'sun';
+    if (type.includes('달 코어')) return 'moon';
     return 'star';
   };
 
@@ -55,8 +55,8 @@ const CoreCard = React.memo(function CoreCard({ core }) {
         </select>
       </div>
       <div className="core-limit">
-        <span style={{ fontSize: '0.875rem', color: '#6b7280' }}>의지력 한도</span>
-        <span style={{ fontSize: '1.125rem', fontWeight: '600', color: '#2d3748' }}>
+        <span className="core-limit-label">의지력 한도</span>
+        <span className="core-limit-value">
           {core.limit}
         </span>
       </div>

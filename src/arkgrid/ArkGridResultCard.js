@@ -30,7 +30,7 @@ function ArkGridResultCard({ combo }) {
       </div>
 
       <div>
-        <h4 style={{ fontSize: '1rem', fontWeight: '600', margin: '0 0 12px 0', color: '#4a5568' }}>
+        <h4 className="gem-list-title">
           포함된 젬
         </h4>
         <div className="gem-list">

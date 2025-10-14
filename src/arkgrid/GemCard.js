@@ -33,10 +33,10 @@ const GemCard = React.memo(function GemCard({ gem }) {
       <div className="gem-number">{gem.gemNumber}</div>
       <div className="gem-info">
         <div className="gem-stats">
-          <span style={{ fontSize: '0.875rem', color: '#6b7280', fontWeight: '500' }}>
+          <span className="gem-cost">
             의지력: {gem.cost}
           </span>
-          <span style={{ fontSize: '0.875rem', color: '#059669', fontWeight: '500' }}>
+          <span className="gem-points">
             포인트: {gem.points}
           </span>
         </div>

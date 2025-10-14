@@ -26,15 +26,15 @@ export const OPTION_LEVEL_VALUES = {
   '추가피해': { 1: 0.3, 2: 0.6, 3: 0.9, 4: 1.2, 5: 1.5 }
 };
 
-export const CORE_TYPES = ['해 코어', '달 코어', '별 코어'];
+export const CORE_TYPES = ['☀️ 해 코어', '🌙 달 코어', '⭐ 별 코어'];
 
 // Initial state
 const initialState = {
   currentPage: '질서',
   cores: [
-    { id: 1, name: '코어 1', type: '해 코어', grade: '영웅', limit: 9 },
-    { id: 2, name: '코어 2', type: '달 코어', grade: '전설', limit: 12 },
-    { id: 3, name: '코어 3', type: '별 코어', grade: '유물', limit: 15 }
+    { id: 1, name: '코어 1', type: '☀️ 해 코어', grade: '영웅', limit: 9 },
+    { id: 2, name: '코어 2', type: '🌙 달 코어', grade: '전설', limit: 12 },
+    { id: 3, name: '코어 3', type: '⭐ 별 코어', grade: '유물', limit: 15 }
   ],
   gems: [
     { id: 1, gemNumber: 1, cost: 5, points: 5, option1: '아군피해강화', option1Level: 1, option2: '아군공격강화', option2Level: 2 }

@@ -15,12 +15,12 @@ const MainHeader = React.memo(function MainHeader() {
       <div className="header-container">
         <div className="header-logo">
           <Link to="/" className="logo-link">
-            <span className="logo-icon">🚀</span>
-            <span className="logo-text">Kolyn092</span>
+            <span className="logo-icon">KolynLab</span>
+            <span className="logo-text"></span>
           </Link>
         </div>
         
-        <nav className="header-nav">
+        {/* <nav className="header-nav">
           <ul className="nav-list">
             <li className="nav-item">
               <Link 
@@ -55,7 +55,7 @@ const MainHeader = React.memo(function MainHeader() {
               </Link>
             </li>
           </ul>
-        </nav>
+        </nav> */}
         
         <div className="header-actions">
           <button 
