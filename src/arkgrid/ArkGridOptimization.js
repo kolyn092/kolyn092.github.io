@@ -46,7 +46,7 @@ export function findBetterReplacement(currentGems, currentCorePoints, availableG
   return bestReplacement;
 }
 
-export function optimize(cores, gems) {
+export function ArkGridOptimization(cores, gems) {
   const results = [];
   const usedGems = new Set();
   

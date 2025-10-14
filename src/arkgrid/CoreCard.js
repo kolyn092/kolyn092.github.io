@@ -1,5 +1,5 @@
 import React from 'react';
-import { useApp, CORE_TYPES, CORE_LIMITS } from '../../context/AppContext';
+import { useApp, CORE_TYPES, CORE_LIMITS } from '../context/AppContext';
 
 const CoreCard = React.memo(function CoreCard({ core }) {
   const { dispatch, ActionTypes } = useApp();

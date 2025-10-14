@@ -1,6 +1,6 @@
 import React from 'react';
 import { useApp } from '../context/AppContext';
-import DataControls from './arkgrid/DataControls';
+import ArkGridDataControls from './ArkGridDataControls';
 
 const Header = React.memo(function Header() {
   const { state, dispatch, ActionTypes } = useApp();
@@ -33,7 +33,7 @@ const Header = React.memo(function Header() {
         </button>
       </div>
       
-      <DataControls />
+      <ArkGridDataControls />
     </div>
   );
 });

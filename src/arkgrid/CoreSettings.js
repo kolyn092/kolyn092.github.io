@@ -1,6 +1,6 @@
 import React from 'react';
 import CoreCard from './CoreCard';
-import { useApp } from '../../context/AppContext';
+import { useApp } from '../context/AppContext';
 
 const CoreSettings = React.memo(function CoreSettings() {
   const { state } = useApp();

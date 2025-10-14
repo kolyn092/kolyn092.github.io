@@ -1,6 +1,6 @@
 import React from 'react';
 import { useApp } from '../context/AppContext';
-import ResultCard from './arkgrid/ResultCard';
+import ArkGridResultCard from './ArkGridResultCard';
 
 const Results = React.memo(function Results() {
   const { state } = useApp();
@@ -17,7 +17,7 @@ const Results = React.memo(function Results() {
       </h2>
       <div className="results">
         {results.map((combo, index) => (
-          <ResultCard key={index} combo={combo} />
+          <ArkGridResultCard key={index} combo={combo} />
         ))}
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import httpService from '../services/httpService';
+import HttpService from '../services/HttpService';
 
 // HTTP 통신을 위한 커스텀 훅
 export function useHttp() {
@@ -26,32 +26,32 @@ export function useHttp() {
 
   // GET 요청
   const get = useCallback(async (endpoint, options = {}) => {
-    return execute(() => httpService.get(endpoint, options));
+    return execute(() => HttpService.get(endpoint, options));
   }, [execute]);
 
   // POST 요청
   const post = useCallback(async (endpoint, data, options = {}) => {
-    return execute(() => httpService.post(endpoint, data, options));
+    return execute(() => HttpService.post(endpoint, data, options));
   }, [execute]);
 
   // PUT 요청
   const put = useCallback(async (endpoint, data, options = {}) => {
-    return execute(() => httpService.put(endpoint, data, options));
+    return execute(() => HttpService.put(endpoint, data, options));
   }, [execute]);
 
   // DELETE 요청
   const del = useCallback(async (endpoint, options = {}) => {
-    return execute(() => httpService.delete(endpoint, options));
+    return execute(() => HttpService.delete(endpoint, options));
   }, [execute]);
 
   // PATCH 요청
   const patch = useCallback(async (endpoint, data, options = {}) => {
-    return execute(() => httpService.patch(endpoint, data, options));
+    return execute(() => HttpService.patch(endpoint, data, options));
   }, [execute]);
 
   // 파일 업로드
   const uploadFile = useCallback(async (endpoint, file, options = {}) => {
-    return execute(() => httpService.uploadFile(endpoint, file, options));
+    return execute(() => HttpService.uploadFile(endpoint, file, options));
   }, [execute]);
 
   // 상태 초기화

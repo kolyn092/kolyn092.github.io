@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useApp } from '../../context/AppContext';
+import { useApp } from '../context/AppContext';
 
 function DataControls() {
   const { state, dispatch, ActionTypes } = useApp();

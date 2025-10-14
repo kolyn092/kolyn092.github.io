@@ -1,5 +1,5 @@
 import React from 'react';
-import { useApp } from '../../context/AppContext';
+import { useApp } from '../context/AppContext';
 import GemCard from './GemCard';
 import GemForm from './GemForm';
 

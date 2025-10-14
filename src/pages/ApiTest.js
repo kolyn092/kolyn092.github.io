@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHttp } from '../hooks/useHttp';
+import { useHttp } from '../hooks/UseHttp';
 import HttpForm from '../components/forms/HttpForm';
 
 // API 테스트 페이지

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ResultCard({ combo }) {
+function ArkGridResultCard({ combo }) {
   const getIconClass = (type) => {
     if (type === '해 코어') return 'sun';
     if (type === '달 코어') return 'moon';
@@ -54,4 +54,4 @@ function ResultCard({ combo }) {
   );
 }
 
-export default ResultCard;
+export default ArkGridResultCard;

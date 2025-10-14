@@ -2,13 +2,13 @@ import React from 'react';
 import { Routes, Route, HashRouter } from 'react-router-dom';
 import { AppProvider } from './context/AppContext';
 import { ThemeProvider } from './context/ThemeContext';
-import MainHeader from './components/MainHeader';
-import NewHomePage from './components/NewHomePage';
-import Header from './components/Header';
-import CoreSettings from './components/arkgrid/CoreSettings';
-import GemManagement from './components/arkgrid/GemManagement';
-import OptimizationButton from './components/arkgrid/OptimizationButton';
-import Results from './components/Results';
+import HomeHeader from './components/HomeHeader';
+import HomePage from './components/HomePage';
+import ArkGridHeader from './arkgrid/ArkGridHeader';
+import CoreSettings from './arkgrid/CoreSettings';
+import GemManagement from './arkgrid/GemManagement';
+import OptimizationButton from './arkgrid/ArkGridOptimizationButton';
+import Results from './arkgrid/ArkGridResults';
 import UserManagement from './pages/UserManagement';
 import ApiTest from './pages/ApiTest';
 import './styles/forms.css';
@@ -18,7 +18,7 @@ function ArkGridOptimizer() {
   return (
     <AppProvider>
       <div className="container">
-        <Header />
+        <ArkGridHeader />
         <CoreSettings />
         <GemManagement />
         <OptimizationButton />
@@ -32,12 +32,10 @@ function App() {
   return (
     <ThemeProvider>
       <HashRouter>
-        <MainHeader />
+        <HomeHeader />
         <Routes>
-          <Route path="/" element={<NewHomePage />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/ark-grid-optimizer" element={<ArkGridOptimizer />} />
-          <Route path="/user-management" element={<UserManagement />} />
-          <Route path="/api-test" element={<ApiTest />} />
         </Routes>
       </HashRouter>
     </ThemeProvider>
