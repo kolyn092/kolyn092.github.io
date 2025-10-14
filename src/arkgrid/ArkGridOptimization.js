@@ -1,4 +1,4 @@
-import { calculateGemPower, calculateCorePoints, isCoreEffectActive, getPointPriority } from './gemCalculations';
+import { calculateGemPower, calculateCorePoints, isCoreEffectActive, getPointPriority } from './GemCalculations';
 
 export function getCombinations(arr, k) {
   if (k === 0) return [[]];

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useApp } from '../context/AppContext';
-import { calculateGemPower } from './gemCalculations';
+import { calculateGemPower } from './GemCalculations';
 
 const GemCard = React.memo(function GemCard({ gem }) {
   const { dispatch, ActionTypes } = useApp();
