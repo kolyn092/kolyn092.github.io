@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import HttpService from '../services/HttpService';
+import HttpService from '../services/httpService';
 
 // HTTP 통신을 위한 커스텀 훅
 export function useHttp() {
