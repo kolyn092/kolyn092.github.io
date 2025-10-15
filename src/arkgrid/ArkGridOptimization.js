@@ -1,4 +1,4 @@
-import { calculateGemPower, calculateCorePoints, isCoreEffectActive, getPointPriority } from './gemCalculations';
+import { calculateGemPower, calculateCorePoints, isCoreEffectActive, getPointPriority } from './GemCalculations';
 
 export function getCombinations(arr, k) {
   if (k === 0) return [[]];
@@ -46,7 +46,7 @@ export function findBetterReplacement(currentGems, currentCorePoints, availableG
   return bestReplacement;
 }
 
-export function optimize(cores, gems) {
+export function ArkGridOptimization(cores, gems) {
   const results = [];
   const usedGems = new Set();
   

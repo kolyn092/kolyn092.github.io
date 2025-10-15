@@ -1,3 +1,19 @@
+/* 다크모드 변수 */
+:root {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --text-primary: #ffffff;
+  --text-secondary: #ffffff;
+  --border-color: #a8a8a8;
+  --shadow: rgba(0,0,0,0.3);
+  --card-bg: #464646;
+  --card-border: #a8a8a8;
+  --grade-hero: #c941f6;
+  --grade-legend: #df8301;
+  --grade-relic: #de5200;
+  --grade-ancient: #e3c7a1;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -6,9 +22,11 @@
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background-color: #f8fafc;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   min-height: 100vh;
   padding: 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -21,7 +39,7 @@ body {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   padding: 24px;
-  border-radius: 12px;
+  border-radius: 0 0 12px 12px;
   margin-bottom: 20px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.1);
   text-align: center;
@@ -31,12 +49,14 @@ body {
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 8px;
+  color: var(--text-primary);
 }
 
 .header p {
   font-size: 1.1rem;
   opacity: 0.9;
   margin-bottom: 16px;
+  color: var(--text-secondary);
 }
 
 .page-switcher {
@@ -91,19 +111,20 @@ body {
 }
 
 .section {
-  background-color: white;
+  background-color: var(--bg-secondary);
   border-radius: 12px;
   padding: 20px;
   margin-bottom: 20px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px var(--shadow);
+  border: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .section h2 {
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 24px;
-  color: #2d3748;
+  color: var(--text-primary);
 }
 
 .core-grid {
@@ -113,10 +134,11 @@ body {
 }
 
 .core-card {
-  border: 2px solid #e2e8f0;
+  border: 2px solid var(--card-border);
   border-radius: 12px;
   padding: 20px;
-  background-color: #fafafa;
+  background-color: var(--card-bg);
+  color: var(--text-primary);
   transition: all 0.2s ease;
 }
 
@@ -140,7 +162,7 @@ body {
 .core-title {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #2d3748;
+  color: var(--text-primary);
 }
 
 .form-group {
@@ -151,7 +173,7 @@ body {
   display: block;
   font-size: 0.875rem;
   font-weight: 500;
-  color: #4a5568;
+  color: var(--text-secondary);
   margin-bottom: 8px;
 }
 
@@ -159,9 +181,10 @@ body {
   width: 100%;
   padding: 12px;
   border-radius: 8px;
-  border: 2px solid #e2e8f0;
+  border: 2px solid var(--border-color);
   font-size: 1rem;
-  background-color: white;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
   cursor: pointer;
   outline: none;
   transition: border-color 0.2s ease;
@@ -176,9 +199,42 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 12px;
-  background-color: white;
+  background-color: var(--bg-secondary);
   border-radius: 8px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.core-limit-label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.core-limit-value {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* 등급별 카드 배경색 */
+.core-card.grade-hero {
+  background: rgba(201, 65, 246, 0.3);
+  border-color: var(--grade-hero);
+}
+
+.core-card.grade-legend {
+  background: rgba(223, 131, 1, 0.3);
+  border-color: var(--grade-legend);
+}
+
+.core-card.grade-relic {
+  background: rgba(222, 82, 0, 0.3);
+  border-color: var(--grade-relic);
+}
+
+.core-card.grade-ancient {
+  background: rgba(227, 199, 161, 0.3);
+  border-color: var(--grade-ancient);
 }
 
 .gem-grid {
@@ -189,18 +245,19 @@ body {
 }
 
 .gem-card {
-  border: 2px solid #e2e8f0;
+  border: 2px solid var(--card-border);
   border-radius: 12px;
   padding: 20px;
-  background-color: white;
+  background-color: var(--card-bg);
+  color: var(--text-primary);
   position: relative;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 4px var(--shadow);
   cursor: pointer;
 }
 
 .gem-card.selected {
   border-color: #667eea;
-  background-color: #f0f4ff;
+  background-color: var(--bg-primary);
   box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
 }
 
@@ -241,15 +298,34 @@ body {
 
 .gem-option-label {
   font-size: 0.875rem;
-  color: #4a5568;
+  color: var(--text-secondary);
   font-weight: 500;
   min-width: 60px;
 }
 
 .gem-option-value {
   font-size: 0.875rem;
-  color: #2d3748;
+  color: var(--text-primary);
   font-weight: 600;
+}
+
+.gem-cost {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.gem-points {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.gem-list-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+  color: var(--text-secondary);
 }
 
 .gem-total {
@@ -258,9 +334,9 @@ body {
   align-items: center;
   margin-top: 8px;
   padding: 8px;
-  background-color: #f8fafc;
+  background-color: var(--bg-primary);
   border-radius: 6px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-color);
 }
 
 .gem-total-value {
@@ -306,18 +382,18 @@ body {
 }
 
 .add-form {
-  border: 2px solid #e2e8f0;
+  border: 2px solid #a8a8a8;
   border-radius: 12px;
   padding: 24px;
   margin-bottom: 24px;
-  background-color: #f8fafc;
+  background-color: #2d2d2d;
 }
 
 .add-form h3 {
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 20px;
-  color: #2d3748;
+  color: var(--text-primary);
 }
 
 .form-row {
@@ -345,7 +421,7 @@ body {
 .form-field label {
   font-size: 0.75rem;
   font-weight: 500;
-  color: #4a5568;
+  color: var(--text-secondary);
   margin-bottom: 4px;
 }
 
@@ -359,7 +435,7 @@ body {
 }
 
 .form-field input:focus, .form-field select:focus {
-  border-color: #667eea;
+  border-color: #ea6666;
 }
 
 .form-buttons {
@@ -378,6 +454,9 @@ body {
   font-weight: 500;
   transition: all 0.2s ease;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 16px 24px;
+  min-width: 120px;
+  min-height: 48px;
 }
 
 .btn-primary:hover {
@@ -393,6 +472,10 @@ body {
   font-size: 0.875rem;
   font-weight: 500;
   transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 16px 24px;
+  min-width: 120px;
+  min-height: 48px;
 }
 
 .btn-secondary:hover {
@@ -432,10 +515,11 @@ body {
 }
 
 .result-card {
-  border: 2px solid #e2e8f0;
+  border: 2px solid var(--card-border);
   border-radius: 12px;
   padding: 20px;
-  background-color: #fafafa;
+  background-color: var(--card-bg);
+  color: var(--text-primary);
   transition: all 0.2s ease;
 }
 
@@ -455,7 +539,7 @@ body {
 .result-title {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #2d3748;
+  color: var(--text-primary);
 }
 
 .result-stats {
@@ -463,10 +547,10 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 12px;
-  background-color: white;
+  background-color: var(--bg-secondary);
   border-radius: 8px;
   margin-bottom: 16px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-color);
 }
 
 .stat-group {
@@ -475,14 +559,14 @@ body {
 
 .stat-label {
   font-size: 0.875rem;
-  color: #6b7280;
+  color: var(--text-secondary);
   margin-bottom: 4px;
 }
 
 .stat-value {
   font-size: 1.125rem;
   font-weight: 600;
-  color: #2d3748;
+  color: var(--text-primary);
 }
 
 .stat-value.large {
@@ -498,11 +582,11 @@ body {
 
 .gem-item {
   padding: 12px;
-  background-color: white;
+  background-color: #2d2d2d;
   border-radius: 6px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-color);
   font-size: 0.875rem;
-  color: #2d3748;
+  color: var(--text-primary);
 }
 
 .gem-item-header {
@@ -538,11 +622,163 @@ body {
 }
 
 .gem-item-option {
-  color: #4a5568;
+  color: var(--text-secondary);
+}
+
+/* 젬 편집 모드 스타일 */
+.gem-card.editing {
+  border-color: #667eea;
+  background-color: var(--bg-primary);
+}
+
+.gem-edit-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.gem-edit-field label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.gem-edit-input {
+  width: 60px;
+  padding: 4px 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+}
+
+.gem-edit-input-small {
+  width: 40px;
+  padding: 4px 6px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+}
+
+.gem-edit-select {
+  width: 120px;
+  padding: 4px 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+}
+
+.gem-edit-input:focus, .gem-edit-select:focus {
+  border-color: #667eea;
+  outline: none;
+}
+
+.btn-save {
+  background-color: #10b981;
+  color: white;
+}
+
+.btn-save:hover {
+  background-color: #059669;
+}
+
+.btn-cancel {
+  background-color: #6b7280;
+  color: white;
+}
+
+.btn-cancel:hover {
+  background-color: #4b5563;
+}
+
+/* 결과 카드 등급별 배경색 */
+.result-card.grade-hero {
+  background: rgba(201, 65, 246, 0.3);
+  border-color: var(--grade-hero);
+}
+
+.result-card.grade-legend {
+  background: rgba(223, 131, 1, 0.3);
+  border-color: var(--grade-legend);
+}
+
+.result-card.grade-relic {
+  background: rgba(222, 82, 0, 0.3);
+  border-color: var(--grade-relic);
+}
+
+.result-card.grade-ancient {
+  background: rgba(227, 199, 161, 0.3);
+  border-color: var(--grade-ancient);
 }
 
 .hidden {
   display: none;
+}
+
+/* 플레이어 타입 토글 스타일 */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.player-type-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.toggle-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.toggle-buttons {
+  display: flex;
+  background-color: var(--bg-secondary);
+  border-radius: 8px;
+  padding: 4px;
+  border: 1px solid var(--border-color);
+}
+
+.toggle-btn {
+  padding: 8px 16px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.toggle-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.toggle-btn.active {
+  background-color: #667eea;
+  color: white;
+  box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
+}
+
+.toggle-btn.active:hover {
+  background-color: #5a67d8;
 }
 
 .file-input {

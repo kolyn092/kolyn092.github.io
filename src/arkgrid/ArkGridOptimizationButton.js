@@ -1,13 +1,13 @@
 import React from 'react';
 import { useApp } from '../context/AppContext';
-import { optimize } from '../utils/optimization';
+import { ArkGridOptimization } from './ArkGridOptimization';
 
-function OptimizationButton() {
+function ArkGridOptimizationButton() {
   const { state, dispatch, ActionTypes } = useApp();
   const { cores, gems, currentPage } = state;
 
   const handleOptimize = () => {
-    const results = optimize(cores, gems);
+    const results = ArkGridOptimization(cores, gems);
     dispatch({
       type: ActionTypes.SET_RESULTS,
       payload: results
@@ -23,4 +23,4 @@ function OptimizationButton() {
   );
 }
 
-export default OptimizationButton;
+export default ArkGridOptimizationButton;

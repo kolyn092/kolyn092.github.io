@@ -36,7 +36,38 @@ function DataControls() {
       try {
         const importedData = JSON.parse(e.target.result);
         
-        if (importedData.gems && importedData.cores) {
+        // 통합 형식 (질서/혼돈 키가 있는 경우)
+        if (importedData['질서'] || importedData['혼돈']) {
+          // localStorage에 통합 데이터 저장
+          localStorage.setItem('arkGridData', JSON.stringify(importedData));
+          
+          // 현재 페이지 데이터만 로드
+          const pageData = importedData[currentPage];
+          if (pageData && pageData.gems && pageData.cores) {
+            const nextGemId = Math.max(...pageData.gems.map(g => g.id), 0) + 1;
+            dispatch({
+              type: ActionTypes.LOAD_DATA,
+              payload: { 
+                cores: pageData.cores, 
+                gems: pageData.gems, 
+                nextGemId 
+              }
+            });
+          }
+          
+          // 로드된 페이지 수 계산
+          const loadedPages = [];
+          if (importedData['질서'] && importedData['질서'].gems && importedData['질서'].cores) {
+            loadedPages.push('질서');
+          }
+          if (importedData['혼돈'] && importedData['혼돈'].gems && importedData['혼돈'].cores) {
+            loadedPages.push('혼돈');
+          }
+          
+          alert(`${loadedPages.join(', ')} 페이지의 데이터를 성공적으로 불러왔습니다.`);
+        }
+        // 단일 페이지 형식 (기존 형식)
+        else if (importedData.gems && importedData.cores) {
           const nextGemId = Math.max(...importedData.gems.map(g => g.id), 0) + 1;
           dispatch({
             type: ActionTypes.LOAD_DATA,

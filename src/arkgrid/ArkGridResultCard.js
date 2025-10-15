@@ -1,14 +1,22 @@
 import React from 'react';
 
-function ResultCard({ combo }) {
+function ArkGridResultCard({ combo }) {
   const getIconClass = (type) => {
     if (type === '해 코어') return 'sun';
     if (type === '달 코어') return 'moon';
     return 'star';
   };
 
+  const getGradeClass = (grade) => {
+    if (grade === '영웅') return 'hero';
+    if (grade === '전설') return 'legend';
+    if (grade === '유물') return 'relic';
+    if (grade === '고대') return 'ancient';
+    return '';
+  };
+
   return (
-    <div className="result-card">
+    <div className={`result-card grade-${getGradeClass(combo.core.grade)}`}>
       <div className="result-header">
         <div className={`result-icon ${getIconClass(combo.core.type)}`}></div>
         <h3 className="result-title">{combo.core.name} ({combo.core.type})</h3>
@@ -30,7 +38,7 @@ function ResultCard({ combo }) {
       </div>
 
       <div>
-        <h4 style={{ fontSize: '1rem', fontWeight: '600', margin: '0 0 12px 0', color: '#4a5568' }}>
+        <h4 className="gem-list-title">
           포함된 젬
         </h4>
         <div className="gem-list">
@@ -54,4 +62,4 @@ function ResultCard({ combo }) {
   );
 }
 
-export default ResultCard;
+export default ArkGridResultCard;

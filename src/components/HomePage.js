@@ -1,78 +1,52 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function HomePage() {
+const NewHomePage = React.memo(function NewHomePage() {
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
-    }}>
-      <div style={{
-        textAlign: 'center',
-        color: 'white',
-        maxWidth: '600px',
-        padding: '40px'
-      }}>
-        <h1 style={{
-          fontSize: '3rem',
-          marginBottom: '20px',
-          fontWeight: '700'
-        }}>
-          🚀 Kolyn092's Projects
-        </h1>
-        <p style={{
-          fontSize: '1.2rem',
-          marginBottom: '40px',
-          opacity: '0.9'
-        }}>
-          개발 프로젝트들을 확인해보세요
-        </p>
-        
-        <div style={{
-          background: 'rgba(255, 255, 255, 0.1)',
-          borderRadius: '20px',
-          padding: '30px',
-          margin: '20px 0',
-          backdropFilter: 'blur(10px)',
-          border: '1px solid rgba(255, 255, 255, 0.2)',
-          transition: 'transform 0.3s ease'
-        }}>
-          <h2 style={{
-            margin: '0 0 15px 0',
-            fontSize: '1.5rem'
-          }}>
-            ⚔️ 아크그리드 최적화 시뮬레이터
-          </h2>
-          <p style={{
-            margin: '0 0 20px 0',
-            fontSize: '1rem'
-          }}>
-            로스트아크 아크그리드 젬 조합을 최적화하는 도구입니다.
+    <div className="main-content">
+      <div className="content-container">
+        {/* 히어로 섹션 */}
+        <div className="hero-section">
+          <h1 className="hero-title">
+
+          </h1>
+          <p className="hero-subtitle">
+            
           </p>
-          <Link 
-            to="/ark-grid-optimizer" 
-            style={{
-              display: 'inline-block',
-              padding: '12px 30px',
-              background: 'rgba(255, 255, 255, 0.2)',
-              color: 'white',
-              textDecoration: 'none',
-              borderRadius: '50px',
-              fontWeight: '600',
-              transition: 'all 0.3s ease',
-              border: '2px solid rgba(255, 255, 255, 0.3)'
-            }}
-          >
-            시뮬레이터 사용하기
-          </Link>
+          <p className="hero-description">
+            
+          </p>
+        </div>
+
+        {/* 기능 카드들 */}
+        <div className="feature-cards">
+          {/* 아크그리드 시뮬레이터 */}
+          <div className="feature-card">
+            <div className="feature-card-header">
+              <span className="feature-icon">⚔️</span>
+              <h2 className="feature-title">아크그리드 최적화 시뮬레이터</h2>
+            </div>
+            <p className="feature-description">
+              로스트아크 아크그리드 젬 조합을 최적화하는 도구입니다. 
+              질서와 혼돈 페이지를 분리하여 각각의 젬 조합을 효율적으로 관리할 수 있습니다.
+            </p>
+            <Link to="/ark-grid-optimizer" className="feature-link">
+              시뮬레이터 사용하기
+            </Link>
+          </div>
         </div>
       </div>
+
+      {/* 푸터 */}
+      <footer className="main-footer">
+        <div className="footer-container">
+          <div className="footer-bottom">
+            <p>&copy; 2024 Kolyn092. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
-}
+});
 
-export default HomePage;
+export default NewHomePage;

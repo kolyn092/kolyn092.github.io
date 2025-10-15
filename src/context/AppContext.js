@@ -21,20 +21,21 @@ export const OPTION_LEVEL_VALUES = {
   '아군피해강화': { 1: 0.95, 2: 1.89, 3: 2.84, 4: 3.79, 5: 4.73 },
   '아군공격강화': { 1: 2.27, 2: 4.73, 3: 7.19, 4: 9.65, 5: 11.74 },
   '낙인력': { 1: 1.52, 2: 3.22, 3: 4.92, 4: 6.62, 5: 8.14 },
-  '공격력': { 1: 1.0, 2: 2.0, 3: 3.0, 4: 4.0, 5: 5.0 },
-  '보스피해': { 1: 0.8, 2: 1.6, 3: 2.4, 4: 3.2, 5: 4.0 },
-  '추가피해': { 1: 0.3, 2: 0.6, 3: 0.9, 4: 1.2, 5: 1.5 }
+  '공격력': { 1: 0.81, 2: 1.61, 3: 2.68, 4: 3.48, 5: 4.28 },
+  '보스피해': { 1: 2.14, 2: 4.28, 3: 6.68, 4: 8.82, 5: 10.96 },
+  '추가피해': { 1: 1.34, 2: 2.94, 3: 4.55, 4: 6.15, 5: 7.75 }
 };
 
-export const CORE_TYPES = ['해 코어', '달 코어', '별 코어'];
+export const CORE_TYPES = ['☀️ 해 코어', '🌙 달 코어', '⭐ 별 코어'];
 
 // Initial state
 const initialState = {
   currentPage: '질서',
+  playerType: '딜러', // 딜러 또는 서폿
   cores: [
-    { id: 1, name: '코어 1', type: '해 코어', grade: '영웅', limit: 9 },
-    { id: 2, name: '코어 2', type: '달 코어', grade: '전설', limit: 12 },
-    { id: 3, name: '코어 3', type: '별 코어', grade: '유물', limit: 15 }
+    { id: 1, name: '코어 1', type: '☀️ 해 코어', grade: '영웅', limit: 9 },
+    { id: 2, name: '코어 2', type: '🌙 달 코어', grade: '전설', limit: 12 },
+    { id: 3, name: '코어 3', type: '⭐ 별 코어', grade: '유물', limit: 15 }
   ],
   gems: [
     { id: 1, gemNumber: 1, cost: 5, points: 5, option1: '아군피해강화', option1Level: 1, option2: '아군공격강화', option2Level: 2 }
@@ -48,6 +49,7 @@ const initialState = {
 // Action types
 const ActionTypes = {
   SWITCH_PAGE: 'SWITCH_PAGE',
+  SET_PLAYER_TYPE: 'SET_PLAYER_TYPE',
   LOAD_DATA: 'LOAD_DATA',
   SAVE_DATA: 'SAVE_DATA',
   UPDATE_CORE_TYPE: 'UPDATE_CORE_TYPE',
@@ -68,6 +70,13 @@ function appReducer(state, action) {
       return {
         ...state,
         currentPage: action.payload,
+        results: []
+      };
+    
+    case ActionTypes.SET_PLAYER_TYPE:
+      return {
+        ...state,
+        playerType: action.payload,
         results: []
       };
     
@@ -172,18 +181,26 @@ export function AppProvider({ children }) {
   // Load data from localStorage on mount
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    const savedCores = localStorage.getItem(`arkGrid${state.currentPage}Cores`);
-    const savedGems = localStorage.getItem(`arkGrid${state.currentPage}Gems`);
+    const savedData = localStorage.getItem('arkGridData');
     
-    if (savedCores || savedGems) {
-      const cores = savedCores ? JSON.parse(savedCores) : state.cores;
-      const gems = savedGems ? JSON.parse(savedGems) : state.gems;
-      const nextGemId = Math.max(...gems.map(g => g.id), 0) + 1;
-      
-      dispatch({
-        type: ActionTypes.LOAD_DATA,
-        payload: { cores, gems, nextGemId }
-      });
+    if (savedData) {
+      try {
+        const data = JSON.parse(savedData);
+        const pageData = data[state.currentPage];
+        
+        if (pageData) {
+          const cores = pageData.cores || state.cores;
+          const gems = pageData.gems || state.gems;
+          const nextGemId = Math.max(...gems.map(g => g.id), 0) + 1;
+          
+          dispatch({
+            type: ActionTypes.LOAD_DATA,
+            payload: { cores, gems, nextGemId }
+          });
+        }
+      } catch (error) {
+        console.error('Failed to load arkGrid data:', error);
+      }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.currentPage]);
@@ -191,8 +208,19 @@ export function AppProvider({ children }) {
   // Save data to localStorage when state changes
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    localStorage.setItem(`arkGrid${state.currentPage}Cores`, JSON.stringify(state.cores));
-    localStorage.setItem(`arkGrid${state.currentPage}Gems`, JSON.stringify(state.gems));
+    try {
+      const existingData = localStorage.getItem('arkGridData');
+      let data = existingData ? JSON.parse(existingData) : {};
+      
+      data[state.currentPage] = {
+        cores: state.cores,
+        gems: state.gems
+      };
+      
+      localStorage.setItem('arkGridData', JSON.stringify(data));
+    } catch (error) {
+      console.error('Failed to save arkGrid data:', error);
+    }
   }, [state.cores, state.gems, state.currentPage]);
 
   const value = {
