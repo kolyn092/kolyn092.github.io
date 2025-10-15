@@ -1,0 +1,290 @@
+{
+  "gems": [
+    {
+      "id": 1760123569927,
+      "gemNumber": 1,
+      "cost": 3,
+      "points": 4,
+      "option1": "추가피해",
+      "option1Level": 1,
+      "option2": "아군피해강화",
+      "option2Level": 4
+    },
+    {
+      "id": 1760123586367,
+      "gemNumber": 2,
+      "cost": 3,
+      "points": 4,
+      "option1": "공격력",
+      "option1Level": 4,
+      "option2": "추가피해",
+      "option2Level": 1
+    },
+    {
+      "id": 1760123601188,
+      "gemNumber": 3,
+      "cost": 3,
+      "points": 3,
+      "option1": "추가피해",
+      "option1Level": 1,
+      "option2": "공격력",
+      "option2Level": 4
+    },
+    {
+      "id": 1760123612698,
+      "gemNumber": 4,
+      "cost": 3,
+      "points": 3,
+      "option1": "아군피해강화",
+      "option1Level": 1,
+      "option2": "추가피해",
+      "option2Level": 1
+    },
+    {
+      "id": 1760123625935,
+      "gemNumber": 5,
+      "cost": 3,
+      "points": 3,
+      "option1": "아군피해강화",
+      "option1Level": 1,
+      "option2": "낙인력",
+      "option2Level": 1
+    },
+    {
+      "id": 1760123635412,
+      "gemNumber": 6,
+      "cost": 3,
+      "points": 3,
+      "option1": "아군피해강화",
+      "option1Level": 1,
+      "option2": "공격력",
+      "option2Level": 1
+    },
+    {
+      "id": 1760123647935,
+      "gemNumber": 7,
+      "cost": 4,
+      "points": 5,
+      "option1": "공격력",
+      "option1Level": 3,
+      "option2": "보스피해",
+      "option2Level": 3
+    },
+    {
+      "id": 1760123663413,
+      "gemNumber": 8,
+      "cost": 4,
+      "points": 3,
+      "option1": "공격력",
+      "option1Level": 3,
+      "option2": "낙인력",
+      "option2Level": 5
+    },
+    {
+      "id": 1760123674577,
+      "gemNumber": 9,
+      "cost": 4,
+      "points": 2,
+      "option1": "아군공격강화",
+      "option1Level": 1,
+      "option2": "보스피해",
+      "option2Level": 1
+    },
+    {
+      "id": 1760123685478,
+      "gemNumber": 10,
+      "cost": 4,
+      "points": 1,
+      "option1": "낙인력",
+      "option1Level": 1,
+      "option2": "추가피해",
+      "option2Level": 3
+    },
+    {
+      "id": 1760123695614,
+      "gemNumber": 11,
+      "cost": 5,
+      "points": 5,
+      "option1": "추가피해",
+      "option1Level": 4,
+      "option2": "공격력",
+      "option2Level": 4
+    },
+    {
+      "id": 1760123710797,
+      "gemNumber": 12,
+      "cost": 5,
+      "points": 5,
+      "option1": "보스피해",
+      "option1Level": 3,
+      "option2": "아군공격강화",
+      "option2Level": 5
+    },
+    {
+      "id": 1760123723738,
+      "gemNumber": 13,
+      "cost": 5,
+      "points": 5,
+      "option1": "공격력",
+      "option1Level": 1,
+      "option2": "아군피해강화",
+      "option2Level": 3
+    },
+    {
+      "id": 1760123733020,
+      "gemNumber": 14,
+      "cost": 5,
+      "points": 5,
+      "option1": "아군피해강화",
+      "option1Level": 2,
+      "option2": "공격력",
+      "option2Level": 2
+    },
+    {
+      "id": 1760123742273,
+      "gemNumber": 15,
+      "cost": 5,
+      "points": 4,
+      "option1": "아군피해강화",
+      "option1Level": 2,
+      "option2": "공격력",
+      "option2Level": 1
+    },
+    {
+      "id": 1760123756368,
+      "gemNumber": 16,
+      "cost": 5,
+      "points": 3,
+      "option1": "아군피해강화",
+      "option1Level": 3,
+      "option2": "공격력",
+      "option2Level": 5
+    },
+    {
+      "id": 1760123774737,
+      "gemNumber": 17,
+      "cost": 5,
+      "points": 3,
+      "option1": "아군공격강화",
+      "option1Level": 4,
+      "option2": "아군피해강화",
+      "option2Level": 2
+    },
+    {
+      "id": 1760123787929,
+      "gemNumber": 18,
+      "cost": 5,
+      "points": 3,
+      "option1": "낙인력",
+      "option1Level": 5,
+      "option2": "추가피해",
+      "option2Level": 5
+    },
+    {
+      "id": 1760123823216,
+      "gemNumber": 20,
+      "cost": 5,
+      "points": 2,
+      "option1": "공격력",
+      "option1Level": 4,
+      "option2": "낙인력",
+      "option2Level": 2
+    },
+    {
+      "id": 1760123845178,
+      "gemNumber": 21,
+      "cost": 5,
+      "points": 2,
+      "option1": "보스피해",
+      "option1Level": 1,
+      "option2": "아군피해강화",
+      "option2Level": 1
+    },
+    {
+      "id": 1760123856912,
+      "gemNumber": 22,
+      "cost": 6,
+      "points": 5,
+      "option1": "공격력",
+      "option1Level": 3,
+      "option2": "아군공격강화",
+      "option2Level": 5
+    },
+    {
+      "id": 1760123867952,
+      "gemNumber": 23,
+      "cost": 6,
+      "points": 2,
+      "option1": "아군피해강화",
+      "option1Level": 5,
+      "option2": "보스피해",
+      "option2Level": 1
+    },
+    {
+      "id": 1760123879050,
+      "gemNumber": 24,
+      "cost": 6,
+      "points": 1,
+      "option1": "아군피해강화",
+      "option1Level": 5,
+      "option2": "공격력",
+      "option2Level": 3
+    },
+    {
+      "id": 1760123891536,
+      "gemNumber": 25,
+      "cost": 7,
+      "points": 5,
+      "option1": "추가피해",
+      "option1Level": 3,
+      "option2": "아군공격강화",
+      "option2Level": 2
+    },
+    {
+      "id": 1760123900092,
+      "gemNumber": 26,
+      "cost": 7,
+      "points": 4,
+      "option1": "아군피해강화",
+      "option1Level": 2,
+      "option2": "아군공격강화",
+      "option2Level": 1
+    },
+    {
+      "id": 1760123910408,
+      "gemNumber": 27,
+      "cost": 7,
+      "points": 2,
+      "option1": "아군공격강화",
+      "option1Level": 5,
+      "option2": "공격력",
+      "option2Level": 3
+    }
+  ],
+  "cores": [
+    {
+      "id": 1,
+      "name": "코어 1",
+      "type": "해 코어",
+      "grade": "고대",
+      "limit": 17
+    },
+    {
+      "id": 2,
+      "name": "코어 2",
+      "type": "달 코어",
+      "grade": "유물",
+      "limit": 15
+    },
+    {
+      "id": 3,
+      "name": "코어 3",
+      "type": "별 코어",
+      "grade": "전설",
+      "limit": 12
+    }
+  ],
+  "pageType": "질서",
+  "exportDate": "2025-10-10T19:22:40.000Z",
+  "version": "1.0"
+}

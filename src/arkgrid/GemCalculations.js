@@ -5,15 +5,11 @@ import { OPTION_LEVEL_VALUES } from '../context/AppContext';
 export function calculateGemPower(gem) {
   let power = 0;
 
-  if (gem.option1Level > 0 && gem.optionLevel1 <= 5 &&
-    !['공격력', '보스피해', '추가피해'].includes(gem.option1)
-  ) {
+  if (gem.option1Level >= 0 && gem.option1Level <= 5) {
     power += OPTION_LEVEL_VALUES[gem.option1][gem.option1Level] || 0;
   }
 
-  if (gem.option2Level > 0 && gem.option2Level <= 5 &&
-    !['공격력', '보스피해', '추가피해'].includes(gem.option2)
-  ) {
+  if (gem.option2Level >= 0 && gem.option2Level <= 5) {
     power += OPTION_LEVEL_VALUES[gem.option2][gem.option2Level] || 0;
   }
 
