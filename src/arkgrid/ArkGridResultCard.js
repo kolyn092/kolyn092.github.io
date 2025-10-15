@@ -7,8 +7,16 @@ function ArkGridResultCard({ combo }) {
     return 'star';
   };
 
+  const getGradeClass = (grade) => {
+    if (grade === '영웅') return 'hero';
+    if (grade === '전설') return 'legend';
+    if (grade === '유물') return 'relic';
+    if (grade === '고대') return 'ancient';
+    return '';
+  };
+
   return (
-    <div className="result-card">
+    <div className={`result-card grade-${getGradeClass(combo.core.grade)}`}>
       <div className="result-header">
         <div className={`result-icon ${getIconClass(combo.core.type)}`}></div>
         <h3 className="result-title">{combo.core.name} ({combo.core.type})</h3>
