@@ -4,6 +4,7 @@ import { calculateGemPower } from './GemCalculations';
 
 const GemCard = React.memo(function GemCard({ gem }) {
   const { state, dispatch, ActionTypes } = useApp();
+  const { playerType } = state;
   const [isEditing, setIsEditing] = useState(false);
   const [editData, setEditData] = useState({
     cost: gem.cost,
@@ -147,7 +148,7 @@ const GemCard = React.memo(function GemCard({ gem }) {
           </div>
           <div className="gem-total">
             <span className="gem-total-value">
-              총 증가량: {calculateGemPower(editData).toFixed(2)}
+              총 증가량: {calculateGemPower(editData, playerType).toFixed(2)}
             </span>
           </div>
         </div>
@@ -199,7 +200,7 @@ const GemCard = React.memo(function GemCard({ gem }) {
         )}
         <div className="gem-total">
           <span className="gem-total-value">
-            총 증가량: {calculateGemPower(gem).toFixed(2)}
+            총 증가량: {calculateGemPower(gem, playerType).toFixed(2)}
           </span>
         </div>
       </div>

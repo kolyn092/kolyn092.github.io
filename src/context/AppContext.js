@@ -31,6 +31,7 @@ export const CORE_TYPES = ['☀️ 해 코어', '🌙 달 코어', '⭐ 별 코�
 // Initial state
 const initialState = {
   currentPage: '질서',
+  playerType: '딜러', // 딜러 또는 서폿
   cores: [
     { id: 1, name: '코어 1', type: '☀️ 해 코어', grade: '영웅', limit: 9 },
     { id: 2, name: '코어 2', type: '🌙 달 코어', grade: '전설', limit: 12 },
@@ -48,6 +49,7 @@ const initialState = {
 // Action types
 const ActionTypes = {
   SWITCH_PAGE: 'SWITCH_PAGE',
+  SET_PLAYER_TYPE: 'SET_PLAYER_TYPE',
   LOAD_DATA: 'LOAD_DATA',
   SAVE_DATA: 'SAVE_DATA',
   UPDATE_CORE_TYPE: 'UPDATE_CORE_TYPE',
@@ -68,6 +70,13 @@ function appReducer(state, action) {
       return {
         ...state,
         currentPage: action.payload,
+        results: []
+      };
+    
+    case ActionTypes.SET_PLAYER_TYPE:
+      return {
+        ...state,
+        playerType: action.payload,
         results: []
       };
     
