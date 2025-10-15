@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHttp, useFormData } from '../../hooks/UseHttp';
+import { useHttp, useFormData } from '../../hooks/useHttp';
 import FormField from './FormField';
 
 // HTTP 통신을 위한 기본 폼 컴포넌트
