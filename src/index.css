@@ -68,6 +68,49 @@ body {
   align-items: center;
 }
 
+.header-nav {
+  display: flex;
+  align-items: center;
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+}
+
+.nav-link {
+  color: rgba(255,255,255,0.9);
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  min-height: 40px;
+}
+
+.nav-link:hover {
+  background: rgba(255,255,255,0.1);
+  color: white;
+}
+
+.nav-link.active {
+  background: rgba(255,255,255,0.2);
+  color: white;
+}
+
 /* API 키 섹션 스타일 */
 .api-key-section {
   display: flex;
@@ -164,6 +207,410 @@ body {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
+}
+
+/* 홈페이지 캐릭터 검색 섹션 */
+.character-search-section {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 40px;
+  margin: 40px 0;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.search-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.search-input-group {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.character-search-input {
+  flex: 1;
+  padding: 16px 20px;
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.character-search-input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+.search-button {
+  padding: 16px 32px;
+  background: linear-gradient(135deg, var(--accent-color) 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 120px;
+}
+
+.search-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4);
+}
+
+.search-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.search-note {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* 로스트아크 캐릭터 정보 페이지 스타일 */
+.character-info-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.character-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.character-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.character-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  opacity: 0.8;
+}
+
+/* 검색 섹션 */
+.search-section {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.search-input-group {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.character-search-input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.character-search-input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.search-button {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, var(--accent-color) 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 100px;
+}
+
+.search-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.search-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* 검색 기록 */
+.search-history h3 {
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+}
+
+.history-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.history-tag {
+  display: flex;
+  align-items: center;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 6px 12px;
+  transition: all 0.2s ease;
+}
+
+.history-tag:hover {
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+.history-name {
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: 14px;
+  margin-right: 8px;
+}
+
+.history-delete {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.history-delete:hover {
+  color: #ff4444;
+}
+
+/* 캐릭터 상세 정보 */
+.character-details {
+  display: grid;
+  gap: 24px;
+}
+
+.character-basic-info {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.character-avatar {
+  flex-shrink: 0;
+}
+
+.avatar-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid var(--accent-color);
+  object-fit: cover;
+}
+
+.character-info {
+  flex: 1;
+}
+
+.character-name {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.character-level, .character-class {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.level-label, .class-label {
+  font-weight: 600;
+  color: var(--text-secondary);
+  min-width: 60px;
+}
+
+.level-value, .class-value {
+  font-weight: 700;
+  color: var(--accent-color);
+  font-size: 1.1rem;
+}
+
+/* 장비 섹션 */
+.equipment-section, .engraving-section, .gem-section, .skill-section {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.equipment-section h3, .engraving-section h3, .gem-section h3, .skill-section h3 {
+  color: var(--text-primary);
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.equipment-grid, .gem-grid, .skill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.equipment-item, .gem-item, .skill-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 12px;
+  transition: all 0.2s ease;
+}
+
+.equipment-item:hover, .gem-item:hover, .skill-item:hover {
+  background: var(--bg-primary);
+  border-color: var(--accent-color);
+}
+
+.item-icon img, .gem-icon img, .skill-icon img {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+}
+
+.item-info, .gem-info, .skill-info {
+  flex: 1;
+}
+
+.item-name, .gem-name, .skill-name {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.item-grade, .item-level, .gem-level, .skill-level {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* 각인 섹션 */
+.engraving-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.engraving-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 8px 16px;
+  transition: all 0.2s ease;
+}
+
+.engraving-item:hover {
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+  color: white;
+}
+
+.engraving-name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.engraving-level {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  background: var(--bg-primary);
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+/* 로딩 섹션 */
+.loading-section {
+  text-align: center;
+  padding: 40px;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--border-color);
+  border-top: 4px solid var(--accent-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 에러 메시지 */
+.error-message {
+  background: #ffebee;
+  border: 1px solid #f44336;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.error-message h3 {
+  color: #d32f2f;
+  margin-bottom: 8px;
+}
+
+.error-message p {
+  color: #d32f2f;
+  margin: 0;
 }
 
 .api-key-status {

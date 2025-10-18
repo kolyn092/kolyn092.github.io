@@ -69,7 +69,7 @@ const MainHeader = React.memo(function MainHeader() {
           </div>
         </div>
         
-        {/* <nav className="header-nav">
+        <nav className="header-nav">
           <ul className="nav-list">
             <li className="nav-item">
               <Link 
@@ -89,10 +89,10 @@ const MainHeader = React.memo(function MainHeader() {
             </li>
             <li className="nav-item">
               <Link 
-                to="/user-management" 
-                className={`nav-link ${isActive('/user-management') ? 'active' : ''}`}
+                to="/character-info" 
+                className={`nav-link ${isActive('/character-info') ? 'active' : ''}`}
               >
-                👥 
+                👤 
               </Link>
             </li>
             <li className="nav-item">
@@ -104,7 +104,7 @@ const MainHeader = React.memo(function MainHeader() {
               </Link>
             </li>
           </ul>
-        </nav> */}
+        </nav>
         
       </div>
     </header>

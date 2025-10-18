@@ -7,7 +7,7 @@ const ApiTest = React.memo(function ApiTest() {
   const { loading, error, get, post, put, delete: del } = useHttp();
   const [response, setResponse] = useState(null);
   const [requestType, setRequestType] = useState('GET');
-  const [endpoint, setEndpoint] = useState('/api/users');
+  const [endpoint, setEndpoint] = useState('/armories/characters');
   const [apiKey, setApiKey] = useState(localStorage.getItem('apiKey') || '');
 
   // API 키 변경 감지
@@ -64,31 +64,37 @@ const ApiTest = React.memo(function ApiTest() {
     setResponse(null);
   };
 
-  // 폼 필드 정의 (POST, PUT 요청용)
+  // 폼 필드 정의 (POST, PUT 요청용) - 로스트아크 API용
   const formFields = [
     {
-      name: 'name',
-      label: '이름',
+      name: 'CategoryCode',
+      label: '카테고리 코드',
+      type: 'number',
+      placeholder: '20000 (예: 무기)'
+    },
+    {
+      name: 'ItemTier',
+      label: '아이템 티어',
+      type: 'number',
+      placeholder: '3 (예: 티어 3)'
+    },
+    {
+      name: 'ItemGrade',
+      label: '아이템 등급',
       type: 'text',
-      placeholder: '이름을 입력하세요'
+      placeholder: '전설 (예: 전설, 영웅)'
     },
     {
-      name: 'email',
-      label: '이메일',
-      type: 'email',
-      placeholder: '이메일을 입력하세요'
-    },
-    {
-      name: 'message',
-      label: '메시지',
-      type: 'textarea',
-      placeholder: '메시지를 입력하세요'
+      name: 'ItemName',
+      label: '아이템 이름',
+      type: 'text',
+      placeholder: '검색할 아이템 이름'
     }
   ];
 
   return (
     <div className="api-test">
-      <h1>API 테스트</h1>
+      <h1>로스트아크 API 테스트</h1>
       
       {/* API 키 상태 */}
       <div className="api-key-status">
@@ -97,7 +103,11 @@ const ApiTest = React.memo(function ApiTest() {
           {apiKey ? `✅ API 키 설정됨: ${apiKey.substring(0, 8)}...` : '❌ API 키가 설정되지 않았습니다'}
         </p>
         <p className="api-key-note">
-          헤더에서 API 키를 설정하면 자동으로 Authorization 헤더에 포함됩니다.
+          로스트아크 API 키를 설정하면 자동으로 Authorization 헤더에 포함됩니다.
+          <br />
+          <a href="https://developer-lostark.game.onstove.com" target="_blank" rel="noopener noreferrer" style={{color: '#667eea', textDecoration: 'underline'}}>
+            로스트아크 개발자 사이트에서 API 키를 발급받으세요
+          </a>
         </p>
       </div>
       
@@ -129,13 +139,14 @@ const ApiTest = React.memo(function ApiTest() {
               onChange={handleEndpointChange}
               className="form-input"
             >
-              <option value="/api/users">사용자 목록 (GET)</option>
-              <option value="/api/users/1">특정 사용자 (GET)</option>
-              <option value="/api/users">사용자 생성 (POST)</option>
-              <option value="/api/users/1">사용자 수정 (PUT)</option>
-              <option value="/api/users/1">사용자 삭제 (DELETE)</option>
-              <option value="/api/health">헬스 체크 (GET)</option>
-              <option value="/api/profile">프로필 조회 (GET)</option>
+              <option value="/armories/characters">캐릭터 정보 조회 (GET)</option>
+              <option value="/armories/characters/{characterName}">특정 캐릭터 정보 (GET)</option>
+              <option value="/characters/{characterName}/siblings">캐릭터 형제 캐릭터 (GET)</option>
+              <option value="/gamecontents/calendar">게임 컨텐츠 캘린더 (GET)</option>
+              <option value="/markets/items">경매장 아이템 조회 (POST)</option>
+              <option value="/markets/items/{itemId}">특정 아이템 정보 (GET)</option>
+              <option value="/guilds/rankings">길드 랭킹 (GET)</option>
+              <option value="/characters/{characterName}/siblings">캐릭터 형제 캐릭터 (GET)</option>
             </select>
           </label>
         </div>
@@ -148,7 +159,7 @@ const ApiTest = React.memo(function ApiTest() {
               value={endpoint}
               onChange={handleEndpointChange}
               className="form-input"
-              placeholder="/api/custom-endpoint"
+              placeholder="/armories/characters/캐릭터명"
             />
           </label>
         </div>
