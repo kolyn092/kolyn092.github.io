@@ -9,7 +9,6 @@ import CoreSettings from './arkgrid/CoreSettings';
 import GemManagement from './arkgrid/GemManagement';
 import OptimizationButton from './arkgrid/ArkGridOptimizationButton';
 import Results from './arkgrid/ArkGridResults';
-import UserManagement from './pages/UserManagement';
 import ApiTest from './pages/ApiTest';
 import './styles/forms.css';
 import './styles/main-layout.css';
@@ -36,6 +35,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/ark-grid-optimizer" element={<ArkGridOptimizer />} />
+          <Route path="/api-test" element={<ApiTest />} />
         </Routes>
       </HashRouter>
     </ThemeProvider>

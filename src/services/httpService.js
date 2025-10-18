@@ -7,11 +7,25 @@ class HttpService {
     };
   }
 
+  // API 키 가져오기
+  getApiKey() {
+    return localStorage.getItem('apiKey') || '';
+  }
+
   // 기본 요청 메서드
   async request(endpoint, options = {}) {
     const url = `${this.baseURL}${endpoint}`;
+    
+    // API 키가 있으면 Authorization 헤더 추가
+    const apiKey = this.getApiKey();
+    const headers = { ...this.defaultHeaders, ...options.headers };
+    
+    if (apiKey) {
+      headers['Authorization'] = `bearer ${apiKey}`;
+    }
+    
     const config = {
-      headers: { ...this.defaultHeaders, ...options.headers },
+      headers,
       ...options,
     };
 

@@ -35,13 +35,28 @@ const NewHomePage = React.memo(function NewHomePage() {
             </Link>
           </div>
         </div>
+        <div className="feature-cards">
+          {/* API 테스트 */}
+          <div className="feature-card">
+            <div className="feature-card-header">
+              <span className="feature-icon">🔧</span>
+              <h2 className="feature-title">API 테스트</h2>
+            </div>
+            <p className="feature-description">
+              API 테스트 페이지입니다.
+            </p>
+            <Link to="/api-test" className="feature-link">
+              API 테스트 사용하기
+            </Link>
+          </div>
+        </div>
       </div>
 
       {/* 푸터 */}
       <footer className="main-footer">
         <div className="footer-container">
           <div className="footer-bottom">
-            <p>&copy; 2024 Kolyn092. All rights reserved.</p>
+            <p>&copy; 2025 Kolyn092. All rights reserved.</p>
           </div>
         </div>
       </footer>

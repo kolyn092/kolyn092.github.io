@@ -12,6 +12,8 @@
   --grade-legend: #df8301;
   --grade-relic: #de5200;
   --grade-ancient: #e3c7a1;
+  --accent-color: #667eea;
+  --accent-hover: #5a6fd8;
 }
 
 * {
@@ -27,6 +29,453 @@ body {
   min-height: 100vh;
   padding: 20px;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 헤더 스타일 */
+.main-header {
+  background: linear-gradient(135deg, var(--accent-color) 0%, #764ba2 100%);
+  color: white;
+  padding: 16px 24px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-logo .logo-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-icon {
+  font-weight: 800;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+}
+
+/* API 키 섹션 스타일 */
+.api-key-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.api-key-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.api-key-label {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.9);
+}
+
+.api-key-edit-btn {
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.api-key-edit-btn:hover {
+  background: rgba(255,255,255,0.3);
+  border-color: rgba(255,255,255,0.5);
+}
+
+.api-key-input-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.api-key-input {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  width: 200px;
+  transition: all 0.2s ease;
+}
+
+.api-key-input::placeholder {
+  color: rgba(255,255,255,0.6);
+}
+
+.api-key-input:focus {
+  outline: none;
+  border-color: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.15);
+}
+
+.api-key-save-btn {
+  background: #4CAF50;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.api-key-save-btn:hover {
+  background: #45a049;
+}
+
+.api-key-cancel-btn {
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.api-key-cancel-btn:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+/* API 테스트 페이지 스타일 */
+.api-test {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.api-key-status {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 40px;
+  margin-top: 30px;
+}
+
+.api-key-status h3 {
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.api-key-valid {
+  color: #4CAF50;
+  font-weight: 600;
+}
+
+.api-key-missing {
+  color: #f44336;
+  font-weight: 600;
+}
+
+.api-key-note {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-top: 8px;
+}
+
+.request-config {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+/* 요청 설정 카드 커스터마이징 */
+.request-config {
+  /* 배경색 변경 */
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  
+  /* 테두리 스타일 */
+  border: 2px solid #667eea;
+  border-radius: 12px;
+  
+  /* 그림자 효과 */
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+  
+  /* 패딩 조정 */
+  padding: 24px;
+  
+  /* 마진 조정 */
+  margin-bottom: 24px;
+}
+
+.request-config h2 {
+  /* 제목 색상 */
+  color: #ffffff;
+  
+  /* 제목 스타일 */
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  
+  /* 제목 장식 */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.request-config .config-row {
+  /* 행 간격 조정 */
+  margin-bottom: 20px;
+}
+
+.request-config .config-row label {
+  /* 라벨 색상 */
+  color: #ffffff;
+  
+  /* 라벨 스타일 */
+  font-weight: 600;
+  font-size: 1rem;
+  
+  /* 라벨 간격 */
+  margin-bottom: 10px;
+  
+  /* 라벨 장식 */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.request-config .form-input {
+  /* 입력 필드 배경 */
+  background: rgba(255, 255, 255, 0.9);
+  
+  /* 입력 필드 테두리 */
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  
+  /* 입력 필드 색상 */
+  color: #1a1a1a;
+  
+  /* 입력 필드 패딩 */
+  padding: 12px 16px;
+  
+  /* 입력 필드 폰트 */
+  font-size: 14px;
+  font-weight: 500;
+  
+  /* 입력 필드 전환 효과 */
+  transition: all 0.3s ease;
+}
+
+.request-config .form-input:focus {
+  /* 포커스 시 배경 */
+  background: rgba(255, 255, 255, 1);
+  
+  /* 포커스 시 테두리 */
+  border-color: #ffffff;
+  
+  /* 포커스 시 그림자 */
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+  
+  /* 포커스 시 변환 */
+  transform: translateY(-1px);
+}
+
+.request-config .form-input::placeholder {
+  /* 플레이스홀더 색상 */
+  color: rgba(26, 26, 26, 0.6);
+  font-style: italic;
+}
+
+/* 요청 설정 카드 추가 커스터마이징 옵션들 */
+
+/* 1. 다크 테마 버전 */
+.request-config.dark-theme {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  border-color: #4a5568;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+.request-config.dark-theme h2,
+.request-config.dark-theme .config-row label {
+  color: #e2e8f0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* 2. 네온 테마 버전 */
+.request-config.neon-theme {
+  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+  border: 2px solid #00ffff;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3), 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+.request-config.neon-theme h2,
+.request-config.neon-theme .config-row label {
+  color: #00ffff;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.request-config.neon-theme .form-input {
+  background: rgba(0, 255, 255, 0.1);
+  border-color: #00ffff;
+  color: #00ffff;
+}
+
+/* 3. 그라데이션 테마 버전 */
+.request-config.gradient-theme {
+  background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 50%, #45b7d1 100%);
+  border: none;
+  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+}
+
+.request-config.gradient-theme h2,
+.request-config.gradient-theme .config-row label {
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* 4. 미니멀 테마 버전 */
+.request-config.minimal-theme {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.request-config.minimal-theme h2,
+.request-config.minimal-theme .config-row label {
+  color: #2d3748;
+  text-shadow: none;
+}
+
+.request-config.minimal-theme .form-input {
+  background: #f7fafc;
+  border-color: #e2e8f0;
+  color: #2d3748;
+}
+
+/* 5. 컬러풀 테마 버전 */
+.request-config.colorful-theme {
+  background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 25%, #fecfef 50%, #fecfef 75%, #fecfef 100%);
+  border: 3px solid #ff6b9d;
+  box-shadow: 0 8px 25px rgba(255, 107, 157, 0.3);
+}
+
+.request-config.colorful-theme h2,
+.request-config.colorful-theme .config-row label {
+  color: #8b5a2b;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+/* 6. 글래스모피즘 테마 버전 */
+.request-config.glass-theme {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.request-config.glass-theme h2,
+.request-config.glass-theme .config-row label {
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* 7. 사이버펑크 테마 버전 */
+.request-config.cyber-theme {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+  border: 2px solid #ff0080;
+  box-shadow: 0 0 30px rgba(255, 0, 128, 0.4), 0 8px 25px rgba(0, 0, 0, 0.6);
+}
+
+.request-config.cyber-theme h2,
+.request-config.cyber-theme .config-row label {
+  color: #ff0080;
+  text-shadow: 0 0 10px rgba(255, 0, 128, 0.5);
+  font-family: 'Courier New', monospace;
+}
+
+.request-config.cyber-theme .form-input {
+  background: rgba(255, 0, 128, 0.1);
+  border-color: #ff0080;
+  color: #ff0080;
+  font-family: 'Courier New', monospace;
+}
+
+.config-row {
+  margin-bottom: 16px;
+}
+
+.config-row label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.form-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+
+.response-section {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.response-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.response-json {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 16px;
+  overflow-x: auto;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--text-primary);
+}
+
+.error-section {
+  background: #ffebee;
+  border: 1px solid #f44336;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 20px;
+}
+
+.error-message {
+  color: #d32f2f;
+  font-weight: 600;
 }
 
 .container {

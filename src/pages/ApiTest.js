@@ -7,7 +7,18 @@ const ApiTest = React.memo(function ApiTest() {
   const { loading, error, get, post, put, delete: del } = useHttp();
   const [response, setResponse] = useState(null);
   const [requestType, setRequestType] = useState('GET');
-  const [endpoint, setEndpoint] = useState('/api/test');
+  const [endpoint, setEndpoint] = useState('/api/users');
+  const [apiKey, setApiKey] = useState(localStorage.getItem('apiKey') || '');
+
+  // API 키 변경 감지
+  React.useEffect(() => {
+    const handleStorageChange = () => {
+      setApiKey(localStorage.getItem('apiKey') || '');
+    };
+    
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
 
   // API 요청 실행
   const handleApiRequest = async (formData) => {
@@ -79,6 +90,17 @@ const ApiTest = React.memo(function ApiTest() {
     <div className="api-test">
       <h1>API 테스트</h1>
       
+      {/* API 키 상태 */}
+      <div className="api-key-status">
+        <h3>현재 API 키 상태</h3>
+        <p className={apiKey ? 'api-key-valid' : 'api-key-missing'}>
+          {apiKey ? `✅ API 키 설정됨: ${apiKey.substring(0, 8)}...` : '❌ API 키가 설정되지 않았습니다'}
+        </p>
+        <p className="api-key-note">
+          헤더에서 API 키를 설정하면 자동으로 Authorization 헤더에 포함됩니다.
+        </p>
+      </div>
+      
       {/* 요청 설정 */}
       <div className="request-config">
         <h2>요청 설정</h2>
@@ -102,12 +124,31 @@ const ApiTest = React.memo(function ApiTest() {
         <div className="config-row">
           <label>
             엔드포인트:
+            <select 
+              value={endpoint} 
+              onChange={handleEndpointChange}
+              className="form-input"
+            >
+              <option value="/api/users">사용자 목록 (GET)</option>
+              <option value="/api/users/1">특정 사용자 (GET)</option>
+              <option value="/api/users">사용자 생성 (POST)</option>
+              <option value="/api/users/1">사용자 수정 (PUT)</option>
+              <option value="/api/users/1">사용자 삭제 (DELETE)</option>
+              <option value="/api/health">헬스 체크 (GET)</option>
+              <option value="/api/profile">프로필 조회 (GET)</option>
+            </select>
+          </label>
+        </div>
+        
+        <div className="config-row">
+          <label>
+            커스텀 엔드포인트:
             <input
               type="text"
               value={endpoint}
               onChange={handleEndpointChange}
               className="form-input"
-              placeholder="/api/endpoint"
+              placeholder="/api/custom-endpoint"
             />
           </label>
         </div>
