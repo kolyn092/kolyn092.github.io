@@ -359,3 +359,187 @@
 .feature-card:nth-child(2) { animation-delay: 0.2s; }
 .feature-card:nth-child(3) { animation-delay: 0.3s; }
 .feature-card:nth-child(4) { animation-delay: 0.4s; }
+
+/* 조합 요약 목록 스타일 */
+.combination-summary-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.combination-summary-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+.combination-summary-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--shadow);
+  border-color: #667eea;
+}
+
+.combination-summary-card.selected {
+  border-color: #667eea;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.2);
+}
+
+.summary-header h3 {
+  color: var(--text-primary);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0 0 15px 0;
+}
+
+.summary-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.summary-points,
+.summary-power {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* 선택된 조합 상세 정보 */
+.selected-combination-details {
+  margin-top: 30px;
+  padding: 25px;
+  background: var(--card-bg);
+  border: 2px solid #667eea;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15);
+}
+
+.selected-combination-details h3 {
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  text-align: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.combination-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 15px;
+}
+
+.result-card.core-info {
+  border: 2px solid #667eea;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+}
+
+.core-target-info {
+  margin-top: 8px;
+}
+
+.target-points {
+  background: #667eea;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.effect-active {
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  color: white;
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+.effect-active .stat-label,
+.effect-active .stat-value {
+  color: white;
+}
+
+.no-gems {
+  text-align: center;
+  padding: 20px;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .combination-summary-list {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .combination-summary-card {
+    padding: 15px;
+  }
+  
+  .summary-stats {
+    gap: 6px;
+  }
+  
+  .summary-points,
+  .summary-power {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+  }
+  
+  .selected-combination-details {
+    padding: 20px;
+    margin-top: 20px;
+  }
+  
+  .combination-details {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 다중 선택 콤보박스 스타일 */
+.form-select[multiple] {
+  min-height: 80px;
+  padding: 8px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: var(--card-bg);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.form-select[multiple]:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-select[multiple] option {
+  padding: 6px 8px;
+  background: var(--card-bg);
+  color: var(--text-primary);
+}
+
+.form-select[multiple] option:checked {
+  background: #667eea;
+  color: white;
+  font-weight: 600;
+}
+
+.form-select[multiple] option:hover {
+  background: rgba(102, 126, 234, 0.1);
+}

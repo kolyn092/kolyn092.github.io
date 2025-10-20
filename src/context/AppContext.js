@@ -33,9 +33,9 @@ const initialState = {
   currentPage: '질서',
   playerType: '딜러', // 딜러 또는 서폿
   cores: [
-    { id: 1, name: '코어 1', type: '☀️ 해 코어', grade: '영웅', limit: 9 },
-    { id: 2, name: '코어 2', type: '🌙 달 코어', grade: '전설', limit: 12 },
-    { id: 3, name: '코어 3', type: '⭐ 별 코어', grade: '유물', limit: 15 }
+    { id: 1, name: '코어 1', type: '☀️ 해 코어', grade: '영웅', limit: 9, targetPoints: [0, 10] },
+    { id: 2, name: '코어 2', type: '🌙 달 코어', grade: '전설', limit: 12, targetPoints: [0, 10] },
+    { id: 3, name: '코어 3', type: '⭐ 별 코어', grade: '유물', limit: 15, targetPoints: [0] }
   ],
   gems: [
     { id: 1, gemNumber: 1, cost: 5, points: 5, option1: '아군피해강화', option1Level: 1, option2: '아군공격강화', option2Level: 2 }
@@ -54,6 +54,7 @@ const ActionTypes = {
   SAVE_DATA: 'SAVE_DATA',
   UPDATE_CORE_TYPE: 'UPDATE_CORE_TYPE',
   UPDATE_CORE_GRADE: 'UPDATE_CORE_GRADE',
+  UPDATE_CORE_TARGET_POINTS: 'UPDATE_CORE_TARGET_POINTS',
   ADD_GEM: 'ADD_GEM',
   UPDATE_GEM: 'UPDATE_GEM',
   DELETE_GEM: 'DELETE_GEM',
@@ -104,6 +105,16 @@ function appReducer(state, action) {
         cores: state.cores.map(core => 
           core.id === action.payload.coreId 
             ? { ...core, grade: action.payload.grade, limit: CORE_LIMITS[action.payload.grade] }
+            : core
+        )
+      };
+    
+    case ActionTypes.UPDATE_CORE_TARGET_POINTS:
+      return {
+        ...state,
+        cores: state.cores.map(core => 
+          core.id === action.payload.coreId 
+            ? { ...core, targetPoints: action.payload.targetPoints }
             : core
         )
       };
