@@ -1,4 +1,4 @@
-import { calculateGemPower, isCoreEffectActive, getPointPriority } from './GemCalculations';
+import { calculateGemPower, isCoreEffectActive, getPointPriority, calculateCoreTotalPower } from './GemCalculations';
 
 export function getCombinations(arr, k) {
   if (k === 0) return [[]];
@@ -109,7 +109,7 @@ export function isCombinationFeasible(cores, gems, targetPoints) {
 }
 
 // 특정 코어 포인트 조합의 최적 젬 배치 찾기
-export function findOptimalGemPlacement(cores, gems, targetPoints) {
+export function findOptimalGemPlacement(cores, gems, targetPoints, currentPage = '질서', playerType = '딜러') {
   const usedGems = new Set();
   const results = [];
   
@@ -147,10 +147,15 @@ export function findOptimalGemPlacement(cores, gems, targetPoints) {
           const isEffectActive = isCoreEffectActive(totalPoints);
           const pointPriority = getPointPriority(totalPoints);
           
-          if (!bestCombo || totalPower > bestCombo.power) {
+          // 코어 계수 적용한 총 전투력 계산
+          const coreTotalPower = calculateCoreTotalPower(combo, core, currentPage, playerType);
+          
+          if (!bestCombo || coreTotalPower.totalPower > bestCombo.power) {
             bestCombo = {
               gems: combo,
-              power: totalPower,
+              power: coreTotalPower.totalPower,
+              gemPower: coreTotalPower.gemPower,
+              coeff: coreTotalPower.coeff,
               cost: totalCost,
               corePoints: totalPoints,
               isEffectActive: isEffectActive,
@@ -191,12 +196,17 @@ export function findOptimalGemPlacement(cores, gems, targetPoints) {
         const totalPower = combo.reduce((s, g) => s + calculateGemPower(g), 0);
         
         if (totalCost <= core.limit) {
-          if (!bestCombo || totalPower > bestCombo.power) {
+          // 0포인트 코어에 대한 코어 계수 적용한 총 전투력 계산
+          const coreTotalPower = calculateCoreTotalPower(combo, core, currentPage, playerType);
+          
+          if (!bestCombo || coreTotalPower.totalPower > bestCombo.power) {
             bestCombo = {
               gems: combo,
-              power: totalPower,
+              power: coreTotalPower.totalPower,
+              gemPower: coreTotalPower.gemPower,
+              coeff: coreTotalPower.coeff,
               cost: totalCost,
-              corePoints: 0, // 0포인트 코어이므로 포인트는 0
+              corePoints: coreTotalPower.corePoints, // 실제 젬 포인트 합산
               isEffectActive: false,
               pointPriority: 0
             };
@@ -231,9 +241,11 @@ export function findOptimalGemPlacement(cores, gems, targetPoints) {
   return results;
 }
 
-export function ArkGridOptimization(cores, gems) {
+export function ArkGridOptimization(cores, gems, currentPage = '질서', playerType = '딜러') {
   console.log('=== 새로운 최적화 시작 ===');
   console.log('총 젬 수:', gems.length);
+  console.log('현재 페이지:', currentPage);
+  console.log('플레이어 타입:', playerType);
   
   // 모든 코어 포인트 조합 생성
   const allCombinations = generateCorePointCombinations(cores);
@@ -246,7 +258,7 @@ export function ArkGridOptimization(cores, gems) {
     console.log(`조합 ${index + 1}:`, combination);
     
     if (isCombinationFeasible(cores, gems, combination)) {
-      const optimalPlacement = findOptimalGemPlacement(cores, gems, combination);
+      const optimalPlacement = findOptimalGemPlacement(cores, gems, combination, currentPage, playerType);
       
       if (optimalPlacement) {
         const totalPower = optimalPlacement.reduce((sum, result) => sum + result.power, 0);
@@ -266,12 +278,12 @@ export function ArkGridOptimization(cores, gems) {
     }
   });
   
-  // 우선순위 정렬: pointPriority > totalPower
+  // 우선순위 정렬: totalPower > totalPointPriority
   feasibleCombinations.sort((a, b) => {
-    if (a.totalPointPriority !== b.totalPointPriority) {
-      return b.totalPointPriority - a.totalPointPriority;
+    if (a.totalPower !== b.totalPower) {
+      return b.totalPower - a.totalPower;
     }
-    return b.totalPower - a.totalPower;
+    return b.totalPointPriority - a.totalPointPriority;
   });
   
   console.log('최종 정렬된 조합:', feasibleCombinations.slice(0, 3).map(c => ({

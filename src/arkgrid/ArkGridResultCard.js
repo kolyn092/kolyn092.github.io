@@ -32,6 +32,12 @@ function ArkGridResultCard({ combo, showCoreInfo = false }) {
           <div className="stat-label">총 전투력</div>
           <div className="stat-value large">{combo.power.toFixed(2)}</div>
         </div>
+        {combo.gemPower !== undefined && (
+          <div className="stat-group">
+            <div className="stat-label">젬 전투력</div>
+            <div className="stat-value">{combo.gemPower.toFixed(2)}</div>
+          </div>
+        )}
         <div className="stat-group">
           <div className="stat-label">코어 포인트</div>
           <div className="stat-value">{combo.corePoints}</div>

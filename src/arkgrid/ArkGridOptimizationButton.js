@@ -4,10 +4,10 @@ import { ArkGridOptimization } from './ArkGridOptimization';
 
 function ArkGridOptimizationButton() {
   const { state, dispatch, ActionTypes } = useApp();
-  const { cores, gems, currentPage } = state;
+  const { cores, gems, currentPage, playerType } = state;
 
   const handleOptimize = () => {
-    const results = ArkGridOptimization(cores, gems);
+    const results = ArkGridOptimization(cores, gems, currentPage, playerType);
     dispatch({
       type: ActionTypes.SET_RESULTS,
       payload: results
