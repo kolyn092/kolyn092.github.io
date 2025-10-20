@@ -80,7 +80,7 @@ export function calculateCorePoints(cores) {
 }
 
 export function isCoreEffectActive(points) {
-  return [10, 14, 17, 18, 19, 20].includes(points);
+  return points >= 10;
 }
 
 export function getPointPriority(points) {

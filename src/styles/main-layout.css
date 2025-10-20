@@ -447,18 +447,6 @@
   background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
 }
 
-.core-target-info {
-  margin-top: 8px;
-}
-
-.target-points {
-  background: #667eea;
-  color: white;
-  padding: 4px 12px;
-  border-radius: 12px;
-  font-size: 0.8rem;
-  font-weight: 600;
-}
 
 .effect-active {
   background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
@@ -470,6 +458,12 @@
 .effect-active .stat-label,
 .effect-active .stat-value {
   color: white;
+}
+
+/* 효과 활성화된 코어 포인트 강조 */
+.effect-active-points {
+  color: #4CAF50 !important;
+  font-weight: 700;
 }
 
 .no-gems {

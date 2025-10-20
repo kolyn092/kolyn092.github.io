@@ -33,7 +33,7 @@ const ArkGridResults = React.memo(function Results() {
               <h3>조합 #{index + 1}</h3>
               <div className="summary-stats">
                 <span className="summary-points">
-                  달성 포인트: [{combinationData.combination.join(', ')}]
+                  달성 포인트: [{combinationData.results.map(result => result.corePoints).join(', ')}]
                 </span>
                 <span className="summary-power">
                   총 전투력: {combinationData.totalPower.toFixed(2)}

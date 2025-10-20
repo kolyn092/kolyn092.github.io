@@ -207,8 +207,8 @@ export function findOptimalGemPlacement(cores, gems, targetPoints, currentPage =
               coeff: coreTotalPower.coeff,
               cost: totalCost,
               corePoints: coreTotalPower.corePoints, // 실제 젬 포인트 합산
-              isEffectActive: false,
-              pointPriority: 0
+              isEffectActive: isCoreEffectActive(coreTotalPower.corePoints), // 실제 포인트로 효과 활성화 확인
+              pointPriority: getPointPriority(coreTotalPower.corePoints) // 실제 포인트로 우선순위 계산
             };
           }
         }

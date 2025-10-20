@@ -20,11 +20,6 @@ function ArkGridResultCard({ combo, showCoreInfo = false }) {
       <div className="result-header">
         <div className={`result-icon ${getIconClass(combo.core.type)}`}></div>
         <h3 className="result-title">{combo.core.name} ({combo.core.type})</h3>
-        {showCoreInfo && (
-          <div className="core-target-info">
-            <span className="target-points">목표: {combo.corePoints}포인트</span>
-          </div>
-        )}
       </div>
       
       <div className="result-stats">
@@ -40,18 +35,14 @@ function ArkGridResultCard({ combo, showCoreInfo = false }) {
         )}
         <div className="stat-group">
           <div className="stat-label">코어 포인트</div>
-          <div className="stat-value">{combo.corePoints}</div>
+          <div className={`stat-value ${combo.isEffectActive ? 'effect-active-points' : ''}`}>
+            {combo.corePoints}
+          </div>
         </div>
         <div className="stat-group">
           <div className="stat-label">사용 의지력</div>
           <div className="stat-value">{combo.cost}/{combo.core.limit}</div>
         </div>
-        {combo.isEffectActive && (
-          <div className="stat-group effect-active">
-            <div className="stat-label">효과 활성화</div>
-            <div className="stat-value">✅</div>
-          </div>
-        )}
       </div>
 
       {combo.gems.length > 0 ? (
