@@ -34,7 +34,7 @@ export function isCoreEffectActive(points) {
 export function getPointPriority(points) {
   if(points >= 20) return 6;
   if(points >= 19) return 5;
-  if(points >= 19) return 4;
+  if(points >= 18) return 4;
   if(points >= 17) return 3;
   if(points >= 14) return 2;
   if(points >= 10) return 1;
