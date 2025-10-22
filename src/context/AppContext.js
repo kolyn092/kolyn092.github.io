@@ -199,19 +199,30 @@ export function AppProvider({ children }) {
         const data = JSON.parse(savedData);
         const pageData = data[state.currentPage];
         
+        console.log(`=== 페이지 전환: ${state.currentPage} ===`);
+        console.log('저장된 데이터:', data);
+        console.log('현재 페이지 데이터:', pageData);
+        
         if (pageData) {
           const cores = pageData.cores || state.cores;
           const gems = pageData.gems || state.gems;
           const nextGemId = Math.max(...gems.map(g => g.id), 0) + 1;
           
+          console.log('로드할 코어 수:', cores.length);
+          console.log('로드할 젬 수:', gems.length);
+          
           dispatch({
             type: ActionTypes.LOAD_DATA,
             payload: { cores, gems, nextGemId }
           });
+        } else {
+          console.log('현재 페이지 데이터가 없습니다. 기본값 사용');
         }
       } catch (error) {
         console.error('Failed to load arkGrid data:', error);
       }
+    } else {
+      console.log('저장된 데이터가 없습니다. 기본값 사용');
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.currentPage]);

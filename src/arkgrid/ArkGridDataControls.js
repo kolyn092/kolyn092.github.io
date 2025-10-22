@@ -7,12 +7,29 @@ function DataControls() {
   const fileInputRef = useRef(null);
 
   const handleExport = () => {
-    const data = {
+    // localStorage에서 모든 페이지 데이터 가져오기
+    const savedData = localStorage.getItem('arkGridData');
+    let allData = {};
+    
+    if (savedData) {
+      try {
+        allData = JSON.parse(savedData);
+      } catch (error) {
+        console.error('Failed to parse saved data:', error);
+        allData = {};
+      }
+    }
+    
+    // 현재 페이지 데이터도 포함
+    allData[currentPage] = {
       gems: gems,
-      cores: cores,
-      pageType: currentPage,
+      cores: cores
+    };
+    
+    const data = {
+      ...allData,
       exportDate: new Date().toISOString(),
-      version: '1.0'
+      version: '2.0'
     };
     
     const dataStr = JSON.stringify(data, null, 2);
@@ -20,7 +37,7 @@ function DataControls() {
     const url = URL.createObjectURL(dataBlob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `ark-grid-${currentPage === '질서' ? 'order' : 'chaos'}-data-${new Date().toISOString().split('T')[0]}.json`;
+    link.download = `ark-grid-unified-data-${new Date().toISOString().split('T')[0]}.json`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -41,7 +58,7 @@ function DataControls() {
           // localStorage에 통합 데이터 저장
           localStorage.setItem('arkGridData', JSON.stringify(importedData));
           
-          // 현재 페이지 데이터만 로드
+          // 현재 페이지 데이터 로드
           const pageData = importedData[currentPage];
           if (pageData && pageData.gems && pageData.cores) {
             const nextGemId = Math.max(...pageData.gems.map(g => g.id), 0) + 1;
@@ -64,7 +81,7 @@ function DataControls() {
             loadedPages.push('혼돈');
           }
           
-          alert(`${loadedPages.join(', ')} 페이지의 데이터를 성공적으로 불러왔습니다.`);
+          alert(`${loadedPages.join(', ')} 페이지의 데이터를 성공적으로 불러왔습니다. 페이지를 전환하면 해당 페이지의 데이터가 자동으로 로드됩니다.`);
         }
         // 단일 페이지 형식 (기존 형식)
         else if (importedData.gems && importedData.cores) {

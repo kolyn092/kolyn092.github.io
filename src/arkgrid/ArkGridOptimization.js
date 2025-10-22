@@ -286,7 +286,7 @@ export function ArkGridOptimization(cores, gems, currentPage = '질서', playerT
     return b.totalPointPriority - a.totalPointPriority;
   });
   
-  console.log('최종 정렬된 조합:', feasibleCombinations.slice(0, 3).map(c => ({
+  console.log('최종 정렬된 조합:', feasibleCombinations.slice(0, 10).map(c => ({
     combination: c.combination,
     totalPower: c.totalPower,
     totalPointPriority: c.totalPointPriority
