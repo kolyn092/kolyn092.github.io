@@ -75,7 +75,7 @@ const CoreCard = React.memo(function CoreCard({ core }) {
         </div>
       </div>
       <div className="form-group">
-        <label className="form-label">목표 포인트</label>
+        <label className="form-label">최소 달성 포인트</label>
         <select
           multiple
           className="form-select"
@@ -84,15 +84,16 @@ const CoreCard = React.memo(function CoreCard({ core }) {
           style={{ minHeight: '80px' }}
         >
           <option value="0">0 (효과 없음)</option>
-          <option value="10">10 (효과 활성화)</option>
-          <option value="14">14 (효과 활성화)</option>
-          <option value="17">17 (효과 활성화)</option>
-          <option value="18">18 (효과 활성화)</option>
-          <option value="19">19 (효과 활성화)</option>
-          <option value="20">20 (효과 활성화)</option>
+          <option value="10">10 이상 (효과 활성화)</option>
+          <option value="14">14 이상 (효과 활성화)</option>
+          <option value="17">17 이상 (효과 활성화)</option>
+          <option value="18">18 이상 (효과 활성화)</option>
+          <option value="19">19 이상 (효과 활성화)</option>
+          <option value="20">20 이상 (효과 활성화)</option>
         </select>
         <div style={{ marginTop: '4px', fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
-          Ctrl+클릭으로 여러 포인트 선택 가능
+          <div>• Ctrl+클릭으로 여러 포인트 선택 가능</div>
+          <div>• 설정한 포인트 이상 달성하면 효과 활성화</div>
         </div>
       </div>
       <div className="core-limit">

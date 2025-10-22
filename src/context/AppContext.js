@@ -43,7 +43,10 @@ const initialState = {
   results: [],
   editingGem: null,
   nextGemId: 2,
-  showAddForm: false
+  showAddForm: false,
+  isOptimizing: false,
+  optimizationProgress: 0,
+  hasOptimized: false
 };
 
 // Action types
@@ -61,7 +64,10 @@ const ActionTypes = {
   SET_EDITING_GEM: 'SET_EDITING_GEM',
   TOGGLE_ADD_FORM: 'TOGGLE_ADD_FORM',
   SET_RESULTS: 'SET_RESULTS',
-  RESET_DATA: 'RESET_DATA'
+  RESET_DATA: 'RESET_DATA',
+  START_OPTIMIZATION: 'START_OPTIMIZATION',
+  UPDATE_OPTIMIZATION_PROGRESS: 'UPDATE_OPTIMIZATION_PROGRESS',
+  STOP_OPTIMIZATION: 'STOP_OPTIMIZATION'
 };
 
 // Reducer
@@ -71,7 +77,8 @@ function appReducer(state, action) {
       return {
         ...state,
         currentPage: action.payload,
-        results: []
+        results: [],
+        hasOptimized: false
       };
     
     case ActionTypes.SET_PLAYER_TYPE:
@@ -168,13 +175,35 @@ function appReducer(state, action) {
     case ActionTypes.SET_RESULTS:
       return {
         ...state,
-        results: action.payload
+        results: action.payload,
+        hasOptimized: true
       };
     
     case ActionTypes.RESET_DATA:
       return {
         ...initialState,
         currentPage: state.currentPage
+      };
+    
+    case ActionTypes.START_OPTIMIZATION:
+      return {
+        ...state,
+        isOptimizing: true,
+        optimizationProgress: 0,
+        results: []
+      };
+    
+    case ActionTypes.UPDATE_OPTIMIZATION_PROGRESS:
+      return {
+        ...state,
+        optimizationProgress: action.payload
+      };
+    
+    case ActionTypes.STOP_OPTIMIZATION:
+      return {
+        ...state,
+        isOptimizing: false,
+        optimizationProgress: 0
       };
     
     default:

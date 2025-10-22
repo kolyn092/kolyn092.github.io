@@ -4,11 +4,43 @@ import ArkGridResultCard from './ArkGridResultCard';
 
 const ArkGridResults = React.memo(function Results() {
   const { state } = useApp();
-  const { results, currentPage } = state;
+  const { results, currentPage, hasOptimized } = state;
   const [selectedCombination, setSelectedCombination] = useState(null);
 
-  if (!results || results.length === 0) {
+  // 페이지 변경 시 선택된 조합 초기화
+  React.useEffect(() => {
+    setSelectedCombination(null);
+  }, [currentPage]);
+
+  // 최적화 실행 전에는 아무것도 표시하지 않음
+  if (!hasOptimized) {
     return null;
+  }
+
+  // 최적화 실행 후 결과가 없는 경우
+  if (!results || results.length === 0) {
+    return (
+      <div className="section">
+        <h2>
+          {currentPage === '질서' ? '⚖️ 질서' : '🌪️ 혼돈'} 최적 조합 결과
+        </h2>
+        <div className="no-results-message">
+          <div className="no-results-content">
+            <div className="no-results-icon">😔</div>
+            <h3>만족하는 조합이 없습니다</h3>
+            <p>현재 설정된 조건으로는 달성 가능한 조합을 찾을 수 없습니다.</p>
+            <div className="no-results-suggestions">
+              <p>다음과 같이 조정해보세요:</p>
+              <ul>
+                <li>• 목표 포인트를 낮춰보세요</li>
+                <li>• 젬을 추가해보세요</li>
+                <li>• 코어 등급을 높여보세요</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   const handleCombinationSelect = (combinationData, index) => {
