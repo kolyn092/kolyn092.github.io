@@ -190,7 +190,8 @@ function appReducer(state, action) {
         ...state,
         isOptimizing: true,
         optimizationProgress: 0,
-        results: []
+        results: [],
+        hasOptimized: true
       };
     
     case ActionTypes.UPDATE_OPTIMIZATION_PROGRESS:

@@ -4,7 +4,7 @@ import ArkGridResultCard from './ArkGridResultCard';
 
 const ArkGridResults = React.memo(function Results() {
   const { state } = useApp();
-  const { results, currentPage, hasOptimized } = state;
+  const { results, currentPage, hasOptimized, isOptimizing } = state;
   const [selectedCombination, setSelectedCombination] = useState(null);
 
   // 페이지 변경 시 선택된 조합 초기화
@@ -12,13 +12,17 @@ const ArkGridResults = React.memo(function Results() {
     setSelectedCombination(null);
   }, [currentPage]);
 
-  // 최적화 실행 전에는 아무것도 표시하지 않음
-  if (!hasOptimized) {
+  console.log('🔍 ArkGridResults 렌더링:', { hasOptimized, isOptimizing, resultsLength: results?.length, results });
+
+  // 최적화 실행 중이거나 실행 전에는 아무것도 표시하지 않음
+  if (isOptimizing || !hasOptimized) {
+    console.log('❌ 최적화 실행 중이거나 실행 전 - 결과 카드 숨김');
     return null;
   }
 
-  // 최적화 실행 후 결과가 없는 경우
+  // 최적화 실행 후 결과가 없는 경우 (빈 배열이거나 null인 경우)
   if (!results || results.length === 0) {
+    console.log('❌ 결과 없음 - "만족하는 조합이 없습니다" 표시');
     return (
       <div className="section">
         <h2>
