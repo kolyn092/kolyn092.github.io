@@ -70,225 +70,173 @@ export function generateCorePointCombinations(cores) {
   return combinations;
 }
 
-// 특정 코어 포인트 조합이 달성 가능한지 확인 (전체 최적화 방식)
+// 특정 코어 포인트 조합이 달성 가능한지 확인 (전역 최적화 방식)
 export function isCombinationFeasible(cores, gems, targetPoints) {
-  // 0이 아닌 포인트 코어들만 필터링
-  const nonZeroCores = cores.map((core, index) => ({
-    ...core,
-    index,
-    targetPoint: targetPoints[index]
-  })).filter(core => core.targetPoint > 0);
+  let isFeasible = false;
   
-  // 의지력한도가 낮은 코어부터 정렬 (최적화 우선순위)
-  nonZeroCores.sort((a, b) => a.limit - b.limit);
-  
-  // 백트래킹으로 모든 가능한 젬 배치 조합 찾기
-  const usedGems = new Set();
-  const assignments = [];
-  
-  function findGemAssignment(coreIndex) {
-    if (coreIndex >= nonZeroCores.length) {
-      console.log('✅ 모든 코어에 젬 배치 완료');
-      return true;
+  // 전역 최적화로 달성 가능한지 확인
+  function checkGlobalFeasibility(coreIndex, usedGems) {
+    if (coreIndex >= cores.length) {
+      // 모든 코어 처리 완료
+      isFeasible = true;
+      return;
     }
     
-    const core = nonZeroCores[coreIndex];
+    const core = cores[coreIndex];
     const availableGems = gems.filter(gem => !usedGems.has(gem.id));
     
-    // 1개부터 4개까지 젬 조합 시도
-    for (let gemCount = 1; gemCount <= 4; gemCount++) {
-      const combos = getCombinations(availableGems, gemCount);
-      
-      for (const combo of combos) {
-        const totalCost = combo.reduce((s, g) => s + g.cost, 0);
-        const totalPoints = combo.reduce((s, g) => s + g.points, 0);
+    if (targetPoints[coreIndex] === 0) {
+      // 0포인트 코어: 젬 배치 없이 다음 코어로
+      checkGlobalFeasibility(coreIndex + 1, usedGems);
+    } else {
+      // 목표 포인트가 있는 코어: 조건을 만족하는 젬 조합 찾기
+      for (let gemCount = 1; gemCount <= 4; gemCount++) {
+        const combos = getCombinations(availableGems, gemCount);
         
-        if (totalCost <= core.limit && totalPoints >= core.targetPoint) {
-          // 이 조합을 사용해보기
-          combo.forEach(gem => usedGems.add(gem.id));
-          assignments.push({
-            coreIndex: core.index,
-            coreName: core.name,
-            gems: combo,
-            totalCost,
-            totalPoints
-          });
+        for (const combo of combos) {
+          const totalCost = combo.reduce((s, g) => s + g.cost, 0);
+          const totalPoints = combo.reduce((s, g) => s + g.points, 0);
           
-          // 다음 코어로 재귀 호출
-          if (findGemAssignment(coreIndex + 1)) {
-            return true;
+          if (totalCost <= core.limit && totalPoints >= targetPoints[coreIndex]) {
+            // 이 조합을 사용해보기
+            combo.forEach(gem => usedGems.add(gem.id));
+            checkGlobalFeasibility(coreIndex + 1, usedGems);
+            
+            if (isFeasible) return; // 달성 가능하면 즉시 종료
+            
+            // 되돌리기
+            combo.forEach(gem => usedGems.delete(gem.id));
           }
-          
-          // 실패 시 이 조합을 되돌리기
-          combo.forEach(gem => usedGems.delete(gem.id));
-          assignments.pop();
         }
       }
     }
-    
-    return false;
   }
   
-  const result = findGemAssignment(0);
+  checkGlobalFeasibility(0, new Set());
   
-  if (result) {
-    console.log('\n✅ 모든 코어 달성 가능');
-    console.log('최종 젬 배치:');
-    assignments.forEach(assignment => {
-      console.log(`  코어 ${assignment.coreIndex + 1}: 젬 ${assignment.gems.length}개, 총의지력 ${assignment.totalCost}, 총포인트 ${assignment.totalPoints}`);
-    });
+  if (isFeasible) {
+    console.log('✅ 모든 코어 달성 가능');
   }
   
-  return result;
+  return isFeasible;
 }
 
-// 특정 코어 포인트 조합의 최적 젬 배치 찾기 (백트래킹 방식)
+// 전역 최적화: 3개 코어에 동시에 젬 배치하여 최대 총 전투력 찾기
 export function findOptimalGemPlacement(cores, gems, targetPoints, currentPage = '질서', playerType = '딜러') {
-  // 0이 아닌 포인트 코어들만 필터링
-  const nonZeroCores = cores.map((core, index) => ({
-    ...core,
-    index,
-    targetPoint: targetPoints[index]
-  })).filter(core => core.targetPoint > 0);
+  let bestTotalPower = 0;
+  let bestAssignment = null;
   
-  // 의지력한도가 낮은 코어부터 정렬 (최적화 우선순위)
-  nonZeroCores.sort((a, b) => a.limit - b.limit);
-  
-  // 백트래킹으로 모든 가능한 젬 배치 조합 찾기
-  const usedGems = new Set();
-  const assignments = [];
-  const results = new Array(cores.length).fill(null);
-  
-  function findGemAssignment(coreIndex) {
-    if (coreIndex >= nonZeroCores.length) {
-      // 모든 코어에 젬 배치 완료
-      return true;
-    }
-    
-    const core = nonZeroCores[coreIndex];
-    const availableGems = gems.filter(gem => !usedGems.has(gem.id));
-    
-    // 1개부터 4개까지 젬 조합 시도
-    for (let gemCount = 1; gemCount <= 4; gemCount++) {
-      const combos = getCombinations(availableGems, gemCount);
+  // 모든 젬을 3개 코어에 배치하는 모든 가능한 조합 탐색
+  function findGlobalOptimalAssignment(coreIndex, usedGems, currentAssignment) {
+    if (coreIndex >= cores.length) {
+      // 모든 코어에 젬 배치 완료 - 총 전투력 계산
+      let totalPower = 0;
+      let validAssignment = true;
       
-      for (const combo of combos) {
-        const totalCost = combo.reduce((s, g) => s + g.cost, 0);
-        const totalPoints = combo.reduce((s, g) => s + g.points, 0);
-        
-        if (totalCost <= core.limit && totalPoints >= core.targetPoint) {
-          // 이 조합을 사용해보기
-          combo.forEach(gem => usedGems.add(gem.id));
-          
-          // 코어 계수 적용한 총 전투력 계산
-          const coreTotalPower = calculateCoreTotalPower(combo, core, currentPage, playerType);
-          const isEffectActive = isCoreEffectActive(totalPoints);
-          const pointPriority = getPointPriority(totalPoints);
-          
-          assignments.push({
-            coreIndex: core.index,
-            coreName: core.name,
-            gems: combo,
-            totalCost,
-            totalPoints,
-            power: coreTotalPower.totalPower,
-            gemPower: coreTotalPower.gemPower,
-            coeff: coreTotalPower.coeff,
-            isEffectActive,
-            pointPriority
-          });
-          
-          // 다음 코어로 재귀 호출
-          if (findGemAssignment(coreIndex + 1)) {
-            return true;
-          }
-          
-          // 실패 시 이 조합을 되돌리기
-          combo.forEach(gem => usedGems.delete(gem.id));
-          assignments.pop();
+      for (let i = 0; i < cores.length; i++) {
+        const assignment = currentAssignment[i];
+        if (assignment) {
+          totalPower += assignment.power;
+        } else if (targetPoints[i] > 0) {
+          // 목표 포인트가 있는 코어에 젬이 배치되지 않음
+          validAssignment = false;
+          break;
         }
       }
+      
+      if (validAssignment && totalPower > bestTotalPower) {
+        bestTotalPower = totalPower;
+        bestAssignment = currentAssignment.map(assignment => assignment ? { ...assignment } : null);
+      }
+      
+      return;
     }
     
-    return false;
-  }
-  
-  const result = findGemAssignment(0);
-  
-  if (result) {
-    // 성공한 경우 results 배열 구성
-    assignments.forEach(assignment => {
-      results[assignment.coreIndex] = {
-        core: cores[assignment.coreIndex],
-        gems: assignment.gems,
-        power: assignment.power,
-        gemPower: assignment.gemPower,
-        coeff: assignment.coeff,
-        cost: assignment.totalCost,
-        corePoints: assignment.totalPoints,
-        isEffectActive: assignment.isEffectActive,
-        pointPriority: assignment.pointPriority
-      };
-    });
+    const core = cores[coreIndex];
+    const availableGems = gems.filter(gem => !usedGems.has(gem.id));
     
-    // 0포인트 코어들에 남은 젬들로 최대 전투력 구성
-    for (let i = 0; i < cores.length; i++) {
-      if (targetPoints[i] === 0) {
-        const core = cores[i];
-        const availableGems = gems.filter(gem => !usedGems.has(gem.id));
-        let bestCombo = null;
+    if (targetPoints[coreIndex] === 0) {
+      // 0포인트 코어: 남은 젬으로 최대 전투력 구성
+      let bestCombo = null;
+      
+      for (let gemCount = 1; gemCount <= 4; gemCount++) {
+        const combos = getCombinations(availableGems, gemCount);
         
-        // 1개부터 4개까지 젬 조합 시도 (의지력 한도 내에서 최대 전투력)
-        for (let gemCount = 1; gemCount <= 4; gemCount++) {
-          const allCombos = getCombinations(availableGems, gemCount);
+        for (const combo of combos) {
+          const totalCost = combo.reduce((s, g) => s + g.cost, 0);
           
-          for (const combo of allCombos) {
-            const totalCost = combo.reduce((s, g) => s + g.cost, 0);
+          if (totalCost <= core.limit) {
+            const coreTotalPower = calculateCoreTotalPower(combo, core, currentPage, playerType);
             
-            if (totalCost <= core.limit) {
-              // 0포인트 코어에 대한 코어 계수 적용한 총 전투력 계산
-              const coreTotalPower = calculateCoreTotalPower(combo, core, currentPage, playerType);
-              
-              if (!bestCombo || coreTotalPower.totalPower > bestCombo.power) {
-                bestCombo = {
-                  gems: combo,
-                  power: coreTotalPower.totalPower,
-                  gemPower: coreTotalPower.gemPower,
-                  coeff: coreTotalPower.coeff,
-                  cost: totalCost,
-                  corePoints: coreTotalPower.corePoints,
-                  isEffectActive: isCoreEffectActive(coreTotalPower.corePoints),
-                  pointPriority: getPointPriority(coreTotalPower.corePoints)
-                };
-              }
+            if (!bestCombo || coreTotalPower.totalPower > bestCombo.power) {
+              bestCombo = {
+                core: core,
+                gems: combo,
+                power: coreTotalPower.totalPower,
+                gemPower: coreTotalPower.gemPower,
+                coeff: coreTotalPower.coeff,
+                cost: totalCost,
+                corePoints: coreTotalPower.corePoints,
+                isEffectActive: isCoreEffectActive(coreTotalPower.corePoints),
+                pointPriority: getPointPriority(coreTotalPower.corePoints)
+              };
             }
           }
         }
+      }
+      
+      if (bestCombo) {
+        bestCombo.gems.forEach(gem => usedGems.add(gem.id));
+        currentAssignment[coreIndex] = bestCombo;
+        findGlobalOptimalAssignment(coreIndex + 1, usedGems, currentAssignment);
+        bestCombo.gems.forEach(gem => usedGems.delete(gem.id));
+        currentAssignment[coreIndex] = null;
+      } else {
+        // 젬 배치 없이 다음 코어로
+        findGlobalOptimalAssignment(coreIndex + 1, usedGems, currentAssignment);
+      }
+    } else {
+      // 목표 포인트가 있는 코어: 조건을 만족하는 젬 조합 찾기
+      for (let gemCount = 1; gemCount <= 4; gemCount++) {
+        const combos = getCombinations(availableGems, gemCount);
         
-        if (bestCombo) {
-          bestCombo.gems.forEach(gem => usedGems.add(gem.id));
-          results[i] = {
-            core: core,
-            ...bestCombo
-          };
-        } else {
-          results[i] = {
-            core: core,
-            gems: [],
-            power: 0,
-            cost: 0,
-            corePoints: 0,
-            isEffectActive: false,
-            pointPriority: 0
-          };
+        for (const combo of combos) {
+          const totalCost = combo.reduce((s, g) => s + g.cost, 0);
+          const totalPoints = combo.reduce((s, g) => s + g.points, 0);
+          
+          if (totalCost <= core.limit && totalPoints >= targetPoints[coreIndex]) {
+            // 이 조합을 사용해보기
+            combo.forEach(gem => usedGems.add(gem.id));
+            
+            const coreTotalPower = calculateCoreTotalPower(combo, core, currentPage, playerType);
+            const assignment = {
+              core: core,
+              gems: combo,
+              power: coreTotalPower.totalPower,
+              gemPower: coreTotalPower.gemPower,
+              coeff: coreTotalPower.coeff,
+              cost: totalCost,
+              corePoints: totalPoints,
+              isEffectActive: isCoreEffectActive(totalPoints),
+              pointPriority: getPointPriority(totalPoints)
+            };
+            
+            currentAssignment[coreIndex] = assignment;
+            findGlobalOptimalAssignment(coreIndex + 1, usedGems, currentAssignment);
+            
+            // 되돌리기
+            combo.forEach(gem => usedGems.delete(gem.id));
+            currentAssignment[coreIndex] = null;
+          }
         }
       }
     }
-    
-    return results;
-  } else {
-    return null; // 달성 불가능
   }
+  
+  // 전역 최적화 시작
+  findGlobalOptimalAssignment(0, new Set(), new Array(cores.length).fill(null));
+  
+  return bestAssignment;
 }
 
 export function ArkGridOptimization(cores, gems, currentPage = '질서', playerType = '딜러') {
@@ -297,17 +245,18 @@ export function ArkGridOptimization(cores, gems, currentPage = '질서', playerT
   
   const feasibleCombinations = [];
   
-  // 각 조합이 달성 가능한지 확인
+  // 각 조합이 달성 가능한지 확인하고 최적 젬 배치 찾기
   allCombinations.forEach((combination, index) => {
-    let result = isCombinationFeasible(cores, gems, combination);
-    console.log('ArkGridOptimization result : ', result);
-    if (result) {
+    // 달성 가능성 확인
+    const isFeasible = isCombinationFeasible(cores, gems, combination);
+    
+    if (isFeasible) {
+      // 전역 최적화로 최대 총 전투력 찾기
       const optimalPlacement = findOptimalGemPlacement(cores, gems, combination, currentPage, playerType);
-      console.log('findOptimalGemPlacement 결과:', optimalPlacement);
       
-      if (optimalPlacement && optimalPlacement.length > 0) {
-        const totalPower = optimalPlacement.reduce((sum, result) => sum + result.power, 0);
-        const totalPointPriority = optimalPlacement.reduce((sum, result) => sum + result.pointPriority, 0);
+      if (optimalPlacement && optimalPlacement.some(result => result !== null)) {
+        const totalPower = optimalPlacement.reduce((sum, result) => sum + (result ? result.power : 0), 0);
+        const totalPointPriority = optimalPlacement.reduce((sum, result) => sum + (result ? result.pointPriority : 0), 0);
         
         feasibleCombinations.push({
           combination: combination,
