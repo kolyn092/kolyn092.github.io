@@ -16,6 +16,423 @@
   --accent-hover: #5a6fd8;
 }
 
+.wrapper {
+  display: block;
+  margin-top: 0;
+  padding: 20px;
+}
+
+.sc-info {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.group-info, .group-equip, .group-system {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.shadow {
+  background: var(--card-bg);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.spec-area {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.tier-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.tier-box img {
+  width: 60px;
+  height: 60px;
+  border-radius: 4px;
+}
+
+.spec-point {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+.gauge-box {
+  flex: 1;
+}
+
+.gauge {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 10px;
+}
+
+.tier {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  visibility: hidden;
+}
+
+.tier.now {
+  background: #ffd700;
+  color: #000;
+}
+
+.tier.next {
+  background: #c0c0c0;
+  color: #000;
+}
+
+.value {
+  font-size: 14px;
+  color: var(--text-primary);
+  visibility: hidden;
+}
+
+.bar {
+  flex: 1;
+  height: 8px;
+  background: #333;
+  border-radius: 4px;
+  position: relative;
+}
+
+.bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 99.8%;
+  background: linear-gradient(90deg, #ffd700, #ffed4e);
+  border-radius: 4px;
+}
+
+.reset {
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.detail-area {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info-wrap {
+  background: var(--bg-secondary);
+  border-radius: 6px;
+  padding: 15px;
+}
+
+.tag {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--accent-color);
+  margin-bottom: 10px;
+}
+
+.info-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #333;
+}
+
+.info-box:last-child {
+  border-bottom: none;
+}
+
+.info-box .text {
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.info-box .text:first-child {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  background: var(--accent-color);
+  border-radius: 2px;
+}
+
+.gem-area {
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  gap: 10px;
+}
+
+.gem-box {
+  width: 50px;
+  height: 50px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #333;
+}
+
+.gem-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.armor-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.armor-list, .accessory-list {
+  list-style: none;
+  display: grid;
+  gap: 15px;
+}
+
+.armor-item, .accessory-item {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.img-box {
+  width: 60px;
+  height: 60px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #333;
+  position: relative;
+}
+
+.img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.progress {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  font-size: 10px;
+  padding: 2px 4px;
+  border-radius: 2px;
+}
+
+/* 방어구 영역 텍스트 박스 */
+.armor-text-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 악세사리 영역 텍스트 박스 */
+.accessory-text-box {
+  flex: 1;
+}
+
+/* 마지막 두 개의 악세사리 아이템만 가로 배치 */
+.accessory-text-box:has(.grinding-wrap:nth-child(2):last-child) {
+  display: flex;
+  gap: 10px;
+}
+
+/* 엘릭서 래퍼 컨테이너 - 가로 배치 */
+.elixir-wrap-container {
+  display: flex !important;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.elixir-wrap-container .elixir-wrap {
+  flex: 1;
+  margin-bottom: 0 !important;
+}
+
+/* 가로 배치되는 grinding-wrap만 flex 적용 */
+.accessory-text-box:has(.grinding-wrap:nth-child(2):last-child) .grinding-wrap {
+  flex: 1;
+}
+
+/* 네모칸 기본 스타일 */
+.name-wrap, .elixir-wrap, .hyper-wrap, .grinding-wrap, .option-wrap, .buff-wrap {
+  height: 20px;
+  background: #333;
+  margin-bottom: 5px;
+  border-radius: 2px;
+  display: block;
+  min-height: 20px;
+}
+
+.ark-area {
+  /* 아크 영역 스타일 */
+}
+
+.ark-list-wrap {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.ark-list {
+  list-style: none;
+}
+
+.title-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: var(--bg-secondary);
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.title-box .tag {
+  margin: 0;
+  font-size: 12px;
+}
+
+.title-box .title {
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.ark-item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 8px;
+  background: var(--bg-secondary);
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
+
+.ark-item .img-box {
+  width: 40px;
+  height: 40px;
+}
+
+.ark-item .tier {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  font-size: 8px;
+  padding: 1px 3px;
+  border-radius: 2px;
+}
+
+.engraving-area {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+}
+
+.engraving-box {
+  width: 60px;
+  height: 60px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #333;
+}
+
+.engraving-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.karma-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.karma-box {
+  display: flex;
+  gap: 15px;
+}
+
+.karma {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.karma .tag {
+  margin: 0;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.karma .tag.evolution {
+  background: #ff6b6b;
+  color: white;
+}
+
+.karma .tag.enlightenment {
+  background: #4ecdc4;
+  color: white;
+}
+
+.karma .tag.leap {
+  background: #45b7d1;
+  color: white;
+}
+
+.karma .rank {
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.report-box {
+  width: 100px;
+  height: 40px;
+  background: #333;
+  border-radius: 4px;
+}
+
+.ads-area {
+  background: #333;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
 * {
   margin: 0;
   padding: 0;
