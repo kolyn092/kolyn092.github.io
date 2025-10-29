@@ -1,17 +1,85 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 // 로스트아크 캐릭터 정보 조회 페이지
 const CharacterInfo = React.memo(function CharacterInfo() {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const [characterName, setCharacterName] = useState(searchParams.get('name') || '');
+  
+  // 캐릭터 정보 변수들 (나중에 API에서 받아올 데이터)
+  const level = '';
+  const jobName = '';
+  const server = '';
+  const itemLevel = '';
+  const guildName = '';
+  const specPoint = '1231';
+
+  const handleSearch = () => {
+    if (characterName.trim()) {
+      navigate(`/character-info?name=${encodeURIComponent(characterName.trim())}`);
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
 
   return (
-    <div className="wrapper">
+    <div className="character-info-page">
+      {/* 검색 섹션 */}
+      <div className="character-search-section">
+        <div className="search-container">
+          <div className="search-input-group">
+            <input
+              type="text"
+              value={characterName}
+              onChange={(e) => setCharacterName(e.target.value)}
+              onKeyPress={handleKeyPress}
+              placeholder="캐릭터명을 입력하세요"
+              className="character-search-input"
+            />
+            <button
+              onClick={handleSearch}
+              disabled={!characterName.trim()}
+              className="search-button"
+            >
+              검색
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* 캐릭터 정보 요약 박스 */}
+      <div className="character-summary-box shadow">
+        <div className="character-avatar">
+          <img src="/asset/image/skeleton-img.png" alt="캐릭터 아바타" />
+        </div>
+        <div className="character-basic-info">
+          <div className="character-name">
+            <span className="character-name">Lv. {level || ''} </span>
+            <span className="character-name">{characterName || ''} </span>
+            <span className="character-name">| {jobName || ''}</span>
+          </div>
+          <div className="character-details">
+            <span className="character-server">서버 : {server || ''}</span>
+            <span className="character-server">레벨 : {itemLevel || ''}</span>
+            <span className="character-server">길드 : {guildName || ''}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* 캐릭터 정보 컨텐츠 */}
+      <div className="wrapper">
       <section className="sc-info search-page" id="sc-info">
         {/* 그룹 1: 스펙 정보 */}
         <div className="group-info">
           {/* 스펙 포인트 영역 */}
           <div className="spec-area shadow minimum flag on">
             <div className="tier-box">
-              <div className="spec-point">2495.29</div>
+              <div className="spec-point">{specPoint || ''}</div>
             </div>
             <div className="gauge-box">
               <div className="gauge">
@@ -59,8 +127,8 @@ const CharacterInfo = React.memo(function CharacterInfo() {
               </div>
               <div className="report-box"></div>
             </div>
-                        {/* 아크 영역 */}
-                        <div className="ark-area shadow">
+            {/* 아크 영역 */}
+            <div className="ark-area shadow">
               <div className="ark-list-wrap">
                 {/* 진화 아크패시브 */}
                 <ul className="ark-list evolution">
@@ -450,6 +518,7 @@ const CharacterInfo = React.memo(function CharacterInfo() {
           </div>
         </section>
       </div>
+    </div>
   );
 });
 

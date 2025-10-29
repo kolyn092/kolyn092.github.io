@@ -17,9 +17,13 @@
 }
 
 .wrapper {
-  display: block;
-  margin-top: 0;
-  padding: 20px;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 0 20px;
+  max-width: 1200px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .sc-info {
@@ -28,6 +32,9 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: center;
 }
 
 .group-info, .group-equip, .group-system {
@@ -46,7 +53,9 @@
 .spec-area {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 20px;
+  position: relative;
 }
 
 .tier-box {
@@ -66,6 +75,11 @@
   font-size: 24px;
   font-weight: bold;
   color: var(--text-primary);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
 }
 
 .gauge-box {
@@ -626,16 +640,7 @@ body {
   padding: 20px;
 }
 
-/* 홈페이지 캐릭터 검색 섹션 */
-.character-search-section {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 16px;
-  padding: 40px;
-  margin: 40px 0;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-  text-align: center;
-}
+/* 홈페이지 캐릭터 검색 섹션 - 제거됨 (중복) */
 
 .search-container {
   max-width: 600px;
@@ -696,34 +701,9 @@ body {
   opacity: 0.8;
 }
 
-/* 로스트아크 캐릭터 정보 페이지 스타일 */
-.character-info-page {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
+/* character-info-page - 제거됨 (사용되지 않음) */
 
-.character-header {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.character-header h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 12px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.character-subtitle {
-  font-size: 1.1rem;
-  color: var(--text-secondary);
-  opacity: 0.8;
-}
+/* character-header - 제거됨 (사용되지 않음) */
 
 /* 검색 섹션 */
 .search-section {
@@ -835,160 +815,15 @@ body {
   color: #ff4444;
 }
 
-/* 캐릭터 상세 정보 */
-.character-details {
-  display: grid;
-  gap: 24px;
-}
+/* character-details - 제거됨 (사용되지 않음) */
 
-.character-basic-info {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
+/* character-basic-info - 제거됨 (사용되지 않음) */
 
-.character-avatar {
-  flex-shrink: 0;
-}
+/* character-avatar, character-info - 제거됨 (사용되지 않음) */
 
-.avatar-image {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  border: 3px solid var(--accent-color);
-  object-fit: cover;
-}
+/* 장비 섹션 - 제거됨 (사용되지 않음) */
 
-.character-info {
-  flex: 1;
-}
-
-.character-name {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 12px;
-}
-
-.character-level, .character-class {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 8px;
-}
-
-.level-label, .class-label {
-  font-weight: 600;
-  color: var(--text-secondary);
-  min-width: 60px;
-}
-
-.level-value, .class-value {
-  font-weight: 700;
-  color: var(--accent-color);
-  font-size: 1.1rem;
-}
-
-/* 장비 섹션 */
-.equipment-section, .engraving-section, .gem-section, .skill-section {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.equipment-section h3, .engraving-section h3, .gem-section h3, .skill-section h3 {
-  color: var(--text-primary);
-  margin-bottom: 20px;
-  font-size: 1.3rem;
-  font-weight: 600;
-}
-
-.equipment-grid, .gem-grid, .skill-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
-}
-
-.equipment-item, .gem-item, .skill-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 12px;
-  transition: all 0.2s ease;
-}
-
-.equipment-item:hover, .gem-item:hover, .skill-item:hover {
-  background: var(--bg-primary);
-  border-color: var(--accent-color);
-}
-
-.item-icon img, .gem-icon img, .skill-icon img {
-  width: 40px;
-  height: 40px;
-  border-radius: 6px;
-}
-
-.item-info, .gem-info, .skill-info {
-  flex: 1;
-}
-
-.item-name, .gem-name, .skill-name {
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 4px;
-}
-
-.item-grade, .item-level, .gem-level, .skill-level {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-}
-
-/* 각인 섹션 */
-.engraving-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.engraving-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 20px;
-  padding: 8px 16px;
-  transition: all 0.2s ease;
-}
-
-.engraving-item:hover {
-  background: var(--accent-color);
-  border-color: var(--accent-color);
-  color: white;
-}
-
-.engraving-name {
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.engraving-level {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  background: var(--bg-primary);
-  padding: 2px 8px;
-  border-radius: 12px;
-}
+/* 각인 섹션 - 제거됨 (사용되지 않음) */
 
 /* 로딩 섹션 */
 .loading-section {
@@ -2118,5 +1953,184 @@ body {
   
   .gem-grid, .results {
     grid-template-columns: 1fr;
+  }
+}
+
+/* 검색 섹션 스타일 */
+.character-search-section {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 20px auto;
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.character-search-section .search-container {
+  width: 100%;
+  max-width: 500px;
+}
+
+.character-search-section .search-input-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.character-search-section .character-search-input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.character-search-section .character-search-input:focus {
+  border-color: var(--accent-color);
+}
+
+.character-search-section .search-button {
+  padding: 12px 24px;
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.character-search-section .search-button:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.character-search-section .search-button:disabled {
+  background: var(--text-muted);
+  cursor: not-allowed;
+}
+
+/* 캐릭터 정보 요약 박스 스타일 */
+.character-summary-box {
+  background: transparent;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 0 auto 20px auto;
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-sizing: border-box;
+  justify-content: center;
+  box-shadow: none;
+}
+
+.character-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 3px solid var(--accent-color);
+}
+
+.character-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.character-basic-info {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+}
+
+.character-name {
+  font-size: 23px;
+  font-weight: 00;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.character-details {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.character-details span {
+  padding: 4px 12px;
+  background: var(--bg-primary);
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.character-class,
+.character-server,
+.character-level {
+  padding: 4px 12px;
+  background: var(--bg-primary);
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  margin: 0;
+}
+
+.character-stats {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  text-align: center;
+  min-width: 80px;
+}
+
+.stat-label {
+  display: block;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.stat-value {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .character-summary-box {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+  
+  .character-stats {
+    justify-content: center;
+  }
+  
+  .character-details {
+    justify-content: center;
   }
 }
