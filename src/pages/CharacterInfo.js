@@ -1,19 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useHttp } from '../hooks/useHttp';
 
 // 로스트아크 캐릭터 정보 조회 페이지
 const CharacterInfo = React.memo(function CharacterInfo() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [characterName, setCharacterName] = useState(searchParams.get('name') || '');
+  const { loading, error, get } = useHttp();
   
-  // 캐릭터 정보 변수들 (나중에 API에서 받아올 데이터)
-  const level = '';
-  const jobName = '';
-  const server = '';
-  const itemLevel = '';
-  const guildName = '';
-  const specPoint = '1231';
+  // 캐릭터 정보 상태
+  const [characterData, setCharacterData] = useState(null);
+  
+  // API에서 캐릭터 정보 가져오기
+  const fetchCharacterData = useCallback(async (name) => {
+    if (!name || !name.trim()) {
+      setCharacterData(null);
+      return;
+    }
+
+    try {
+      const encodedName = encodeURIComponent(name.trim());
+      const filters = ['profiles', 'equipment', 'combat-skills', 'engravings', 'cards', 'gems', 'arkpassive', 'arkgrid'].join('%2B');
+      const endpoint = `/armories/characters/${encodedName}?filters=${filters}`;
+      const data = await get(endpoint);
+      console.log('조회 결과 데이터', data);
+      setCharacterData(data);
+    } catch (err) {
+      console.error('캐릭터 정보 조회 실패:', err);
+      setCharacterData(null);
+    }
+  }, [get]);
+
+  // URL 파라미터의 characterName이 변경될 때마다 API 호출
+  useEffect(() => {
+    const nameFromUrl = searchParams.get('name');
+    if (nameFromUrl) {
+      fetchCharacterData(nameFromUrl);
+    } else {
+      setCharacterData(null);
+    }
+  }, [searchParams, fetchCharacterData]);
+
+  // API 응답 데이터에서 필요한 정보 추출 (null-safe)
+  const level = characterData?.CharacterBasicInfo?.CharacterLevel || '';
+  const jobName = characterData?.CharacterBasicInfo?.CharacterClassName || '';
+  const server = characterData?.ServerName || '';
+  const itemLevel = characterData?.CharacterBasicInfo?.ItemAvgLevel || '';
+  const guildName = characterData?.GuildName || '';
+  const specPoint = characterData?.CharacterBasicInfo?.ItemMaxLevel || '';
+  const characterImage = characterData?.CharacterBasicInfo?.CharacterImage || '/asset/image/skeleton-img.png';
 
   const handleSearch = () => {
     if (characterName.trim()) {
@@ -32,44 +68,60 @@ const CharacterInfo = React.memo(function CharacterInfo() {
       {/* 검색 섹션 */}
       <div className="character-search-section">
         <div className="search-container">
-          <div className="search-input-group">
-            <input
-              type="text"
-              value={characterName}
-              onChange={(e) => setCharacterName(e.target.value)}
+        <div className="search-input-group">
+          <input
+            type="text"
+            value={characterName}
+            onChange={(e) => setCharacterName(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="캐릭터명을 입력하세요"
-              className="character-search-input"
-            />
-            <button
-              onClick={handleSearch}
+            placeholder="캐릭터명을 입력하세요"
+            className="character-search-input"
+          />
+          <button
+            onClick={handleSearch}
               disabled={!characterName.trim()}
-              className="search-button"
-            >
+            className="search-button"
+          >
               검색
-            </button>
+          </button>
           </div>
         </div>
-      </div>
+                </div>
+
+      {/* 로딩 상태 */}
+      {loading && (
+        <div style={{ textAlign: 'center', padding: '20px' }}>
+          <p>캐릭터 정보를 불러오는 중...</p>
+          </div>
+        )}
+
+      {/* 에러 상태 */}
+      {error && (
+        <div style={{ textAlign: 'center', padding: '20px', color: 'red' }}>
+          <p>오류: {error}</p>
+        </div>
+      )}
 
       {/* 캐릭터 정보 요약 박스 */}
-      <div className="character-summary-box shadow">
-        <div className="character-avatar">
-          <img src="/asset/image/skeleton-img.png" alt="캐릭터 아바타" />
-        </div>
-        <div className="character-basic-info">
-          <div className="character-name">
-            <span className="character-name">Lv. {level || ''} </span>
-            <span className="character-name">{characterName || ''} </span>
-            <span className="character-name">| {jobName || ''}</span>
+      {!loading && (
+        <div className="character-summary-box shadow">
+          <div className="character-avatar">
+            <img src={characterImage} alt="캐릭터 아바타" />
           </div>
-          <div className="character-details">
-            <span className="character-server">서버 : {server || ''}</span>
-            <span className="character-server">레벨 : {itemLevel || ''}</span>
-            <span className="character-server">길드 : {guildName || ''}</span>
+          <div className="character-basic-info">
+            <div className="character-name">
+              <span className="character-name">Lv. {level || ''} </span>
+              <span className="character-name">{characterName || characterData?.CharacterName || ''} </span>
+              <span className="character-name">| {jobName || ''}</span>
+            </div>
+            <div className="character-details">
+              <span className="character-server">서버 : {server || ''}</span>
+              <span className="character-server">레벨 : {itemLevel || ''}</span>
+              <span className="character-server">길드 : {guildName || ''}</span>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* 캐릭터 정보 컨텐츠 */}
       <div className="wrapper">
@@ -80,7 +132,7 @@ const CharacterInfo = React.memo(function CharacterInfo() {
           <div className="spec-area shadow minimum flag on">
             <div className="tier-box">
               <div className="spec-point">{specPoint || ''}</div>
-            </div>
+              </div>
             <div className="gauge-box">
               <div className="gauge">
                 <span className="value"></span>
@@ -275,7 +327,7 @@ const CharacterInfo = React.memo(function CharacterInfo() {
                     <div className="img-box">
                       <span className="tier">N</span>
                       <img src="/asset/image/skeleton-img.png" alt="아크패시브" />
-                    </div>
+                  </div>
                     <div className="text-box"></div>
                   </li>
                 </ul>
@@ -318,7 +370,7 @@ const CharacterInfo = React.memo(function CharacterInfo() {
               </div>
               <div className="gem-box radius skeleton">
                 <img src="/asset/image/skeleton-img.png" alt="" />
-              </div>
+                  </div>
               <div className="gem-box radius skeleton">
                 <img src="/asset/image/skeleton-img.png" alt="" />
               </div>
@@ -427,7 +479,7 @@ const CharacterInfo = React.memo(function CharacterInfo() {
                     </div>
                     <div className="armor-text-box">
                       <div className="name-wrap"></div>
-                    </div>
+                  </div>
                   </li>
                 </ul>
               </div>
@@ -494,7 +546,7 @@ const CharacterInfo = React.memo(function CharacterInfo() {
                     <div className="img-box radius skeleton">
                       <img src="/asset/image/skeleton-img.png" alt="" />
                       <span className="progress">NN</span>
-                    </div>
+            </div>
                     <div className="accessory-text-box">
                       <div className="grinding-wrap"></div>
                       <div className="grinding-wrap"></div>
@@ -510,14 +562,14 @@ const CharacterInfo = React.memo(function CharacterInfo() {
                       <div className="grinding-wrap"></div>
                       <div className="grinding-wrap"></div>
                       <div className="grinding-wrap"></div>
-                    </div>
+                  </div>
                   </li>
                 </ul>
               </div>
             </div>
-          </div>
+        </div>
         </section>
-      </div>
+        </div>
     </div>
   );
 });
